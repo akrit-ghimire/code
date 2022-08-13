@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet">
+
+    <!-- Data Files -->
+    <link rel="stylesheet" href="data-files/Api and Scratch/data-api-introduction.css">
+    <link rel="stylesheet" href="data-files/Api and Scratch/data-file-intro.css">
+    <!-- Data Files -->
+    
+    <script src="js/formatter.js" defer></script>
+    <script src="js/extractor.js" defer></script>
+    <script src="js/displayer.js" defer></script>
+    
+    <script src="js/ui_elements.js" defer></script>
+
+    <title>Document</title>
+</head>
+
+<body class="dox-grid">
+    <nav
+        class="container-fluid  d-flex align-items-center justify-content-between dox-nav-bar h-auto px-4 border-bottom">
+        <div class="dox-left-container">
+            <i role="button" onclick="sidebar_toggle()" class="fa fa-bars me-3 text-dark"></i>
+            <a class="navbar-brand fw-bold" href="#">My Wiki</a>
+        </div>
+        <div class="dox-right-container">
+            <a class="hide-on-tablet dox-links px-2 py-1">Discord</a>
+            <a class="hide-on-tablet dox-links px-2 py-1">Donate</a>
+            <a class="hide-on-mobile dox-links px-2 py-1" href="#" data-append-ui-link>w3schools</a>
+            <a class="hide-on-mobile dox-links px-2 py-1" href="#hello/__search__/?q=hello kitty"
+                data-append-ui-link>Scratch Dox</a>
+            <select class="form-select dox-ui-options fs-6 px-2 py-1 mx-2" aria-label="Default select example">
+                <option selected value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="system">System</option>
+            </select>
+            <button data-open-search-container onclick="alert('open search bar modal')"
+                class="dox-ui-open-search-button py-1 px-3 mx-1 text-muted"><i
+                    class="fa fa-search text-dark"></i><span class="ms-2 hide-on-mobile">Search</span></button>
+        </div>
+    </nav>
+    <section class="row p-0 m-0" style="overflow:hidden; height: 100%;">
+        <div data-folder-container class="col-sm-auto p-0 m-0 border-end fw-semibold list-group list-group-flush" style="display: block;">
+            
+        </div>
+        <div data-page class="col-sm m-0 bg-light px-5 py-4" style="overflow-y: scroll;">
+
+        </div>
+    </section>
+</body>
+
+</html>

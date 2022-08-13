@@ -1,0 +1,87 @@
+:root {
+    --bs-light-gray: #e5e7eb
+}
+* {
+    box-sizing: border-box;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+}
+
+/* MAIN WEBSITE GRID */
+
+.dox-grid {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 3.5rem auto;
+}
+.dox-right-container,
+.dox-left-container {
+    width: auto;
+    right: 0;
+    display: inline-block;
+}
+.dox-left-container { display: flex; align-items: center; }
+
+/* NAV STYLINGS */
+
+.dox-links {
+    background-color: transparent;
+    display: inline-block;
+    border-radius: 6px;
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--bs-dark);
+    transition: 0.2s;
+    cursor: pointer;
+    user-select: none;
+}
+.dox-links:hover { color: var(--bs-dark); background-color: var(--bs-light-gray); opacity: 1; }
+.dox-links:active { opacity: 0.8; }
+.dox-links-ui {
+    width: 1.3rem;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+}
+.dox-links-ui:hover { color: var(--bs-blue); }
+.dox-ui-options { width: 7rem; display: inline-block; }
+.dox-ui-open-search-button {
+    background-color: var(--bs-light-gray);
+    border: 2px solid var(--bs-light-gray);
+    font-size: 1rem;
+    border-radius: 2rem;
+}
+.dox-ui-open-search-button:hover { border-color: var(--bs-blue); background-color: transparent; }
+.dox-ui-open-search-button:hover span { color: var(--bs-dark); }
+
+/* SIDEBAR STYLINGS */
+
+.dox-list-content a { display: list-item; list-style: none; }
+.dox-override-list-group-item:hover {background-color: transparent; color: var(--bs-dark);}
+.dox-override-list-group-item:active {background-color: transparent;}
+
+/* ARTICLE PAGE STYLINGS */
+
+.horizontal-line { width: fit-content; border-bottom: 4px solid var(--bs-light-gray); }
+.thick { border-bottom-width: 4px; }
+.thin { width: 100%; border-bottom-width: 2px; }
+
+.callout { border-left-color: var(--bs-warning); border-left-width: 5px; background: transparent; }
+.callout-image { background: transparent; max-width: 500px; }
+.callout-image image { width: 100%; height: 100%; object-fit: cover;}
+
+.no-link-decoration { text-decoration: none; color: var(--bs-dark); }
+.no-link-decoration:hover { color: var(--bs-dark); }
+.no-link-decoration span { color: transparent; transition: 0.1s; }
+.no-link-decoration:hover span { color: var(--bs-blue); }
+
+/* MEDIA QUERIES / RESPONSIVENESS */
+
+@media only screen and (max-width: 1024px) {
+    .hide-on-tablet {
+        display: none;
+    }
+}
+@media only screen and (max-width: 750px) {
+    .hide-on-mobile {
+        display: none;
+    }
+}
