@@ -1,5 +1,3 @@
-// extract data
-// 
 const data_directory = extract_page_data()
 const create_folder = (folder, sub_contents) => {
     const folder_element = document.createElement('div')
@@ -63,8 +61,6 @@ const display_data_file = (folder, file) => {
     data_directory[folder][file].forEach(object => {
         const block = object.element
         const content = object.content
-
-        console.log(object.element, object.content)
 
         let page_element = 'INVALID BLOCK'
         if (block == 'block-title') page_element = title_preset(content)

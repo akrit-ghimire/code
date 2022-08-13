@@ -3,4 +3,3 @@ const ui_indicator = `<svg xmlns="http://www.w3.org/2000/svg" class="dox-links-u
 for (i in ui_links) {
     ui_links[i].insertAdjacentHTML('beforeend', ui_indicator)
 }
-console.log(ui_links)
