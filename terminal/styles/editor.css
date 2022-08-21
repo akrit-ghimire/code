@@ -1,0 +1,12 @@
+#editor {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--color-vibrant-1);
+    outline: 0;
+    font-size: 1rem;
+    resize: none;
+    border-radius: 0.5rem;
+}
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--color-dark-light); }
+::-webkit-scrollbar-thumb { background: var(--color-dark-contrast); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-vibrant-1); }
