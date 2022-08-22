@@ -405,10 +405,10 @@ const state = {
             state.editorFunctions.saveEditor(state.props.currentEditor)
 
             const stateData = {
-                projectName: state.props.projectName,
+                projectName: prompt('Please enter a file name for your project.'),
                 data: state.props.data
             }
-            const downloadProjectName = stateData.projectName.replace(/ /g, "")
+            const downloadProjectName = stateData.projectName.lenght > 1 ? stateData.projectName.replace(/ /g, "") : 'AkritBoxSaveFile'
 
             const aDownloadTag = document.createElement('a')
             const downloadData = new Blob([JSON.stringify(stateData)], { type: 'text/akrit' })
