@@ -226,7 +226,7 @@ const state = {
                 const destroyConsoleServer = () => {
                     state.runScriptFunctions.data.runningConsole = false
                     iframe.srcdoc = ''
-                    state.enterFullScreen()
+                    // state.enterFullScreen()
                     document.querySelector('#body-area').removeChild(iframe)
                     left.removeChild(blinkingText)
                     right.removeChild(closeButton)
@@ -278,7 +278,7 @@ const state = {
                 const destroyWebsiteServer = () => {
                     document.body.removeChild(closeButton)
                     document.body.removeChild(iframe)
-                    state.enterFullScreen()
+                    // state.enterFullScreen()
                     document.querySelector('#window').style.display = 'grid'
                     state.editorFunctions.loadEditor() // trigger a refresh of the console.
                 }
@@ -305,7 +305,7 @@ const state = {
                 state.editorFunctions.createLinkTabs()
                 state.menuFunctions.hideMenu()
             }
-            state.enterFullScreen()
+            // state.enterFullScreen()
         },
         load: () => {
             state.fileFunctions.getFile()
@@ -390,7 +390,10 @@ const state = {
             }
             if (fullscreen_op) {
                 menu.append(fullscreen_op)
-                fullscreen_op.addEventListener('click', () => {state.enterFullScreen(); state.menuFunctions.hideMenu()})
+                fullscreen_op.addEventListener('click', () => {
+                    state.enterFullScreen(); 
+                    state.menuFunctions.hideMenu();
+                })
             }
             if (back_op) {
                 menu.append(back_op)
