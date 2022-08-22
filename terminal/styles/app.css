@@ -6,7 +6,7 @@
     --color-vibrant-2: #a0dd3d;
 }
 html { 
-    font-size: 16px ;
+    font-size: 20px ;
     font-family: sans-serif;
     background-color: var(--color-dark);
 }
@@ -43,6 +43,7 @@ html {
     grid-gap: 1rem;
     margin: auto;
     max-width: 900px;
+    transition: 0.1s;
 }
 
 #menu {

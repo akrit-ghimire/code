@@ -36,6 +36,11 @@ const state = {
             Array.from(document.querySelectorAll('[data-hide-command-subscriber]')).forEach(element => {
                 element.style.display = state.props.hideCommand ? 'none' : 'flex'
             })
+            if (state.props.hideCommand) {
+                state.keyboardFunctions._hideKeyboard()
+            } else {
+                state.keyboardFunctions._showKeyboard()
+            }
         }
     },
     editorFunctions: {
@@ -119,11 +124,16 @@ const state = {
             cssReference: '<link href="./styles.css" rel="stylesheet">',
             jsReference: '<script src="./script.js"></script>',
             jsConsoleHeaderFile: `
-                const console = {
-                    log: (message) => { parent.postMessage({type: 'log', message}, '*') },
-                    warn: (message) => { parent.postMessage({type: 'warn', message}, '*') }
+                document.head.innerHTML = "<style>:root {--color-vibrant-1: #ea1f63;}body {font-size: calc(20px*1.05);color: var(--color-vibrant-1);font-family: sans-serif;}::-webkit-scrollbar { width: 10px; }::-webkit-scrollbar-track { background: var(--color-dark-light); }::-webkit-scrollbar-thumb { background: var(--color-dark-contrast); }::-webkit-scrollbar-thumb:hover { background: var(--color-vibrant-1); }</style>"
+                document.write('Your Javascript file is now running!')
+                console = {
+                    log: function(m){
+                        document.head.innerHTML = "<style>:root {--color-vibrant-1: #ea1f63;}body {font-size: calc(20px*1.05);color: var(--color-vibrant-1);font-family: sans-serif;} ::-webkit-scrollbar { width: 10px; } ::-webkit-scrollbar-track { background: var(--color-dark-light); } ::-webkit-scrollbar-thumb { background: var(--color-dark-contrast); } ::-webkit-scrollbar-thumb:hover { background: var(--color-vibrant-1); }</style>"
+                        document.write('<br>'+m)
+                    }       
                 };
             `,
+            runningConsole: false
         },
         filterHTML: () => {
             return state.props.data.html.replace(/\n/, "")
@@ -160,6 +170,7 @@ const state = {
         runConsole: () => {
             state.setState('hideCommand', true)
             state.editorFunctions.saveEditor(state.props.currentEditor)
+            state.runScriptFunctions.data.runningConsole = true
 
             const editor = state.editorFunctions.data.editor
             editor.disabled = true
@@ -185,27 +196,38 @@ const state = {
                 iframe.sandbox.add('allow-scripts')
                 iframe.sandbox.add('allow-modals')
                 iframe.sandbox.add('allow-popups')
-                iframe.srcdoc = `<script defer>${state.runScriptFunctions.filterJS(true)}</script>`
-                iframe.style.display = 'none'
-                document.body.append(iframe)
+                iframe.classList.add('outline', 'px-1', 'py-1')
+                iframe.srcdoc = `
+                    <!DOCTYPE html>
+                    <html>
+                        <head>
+                            <script defer>${state.runScriptFunctions.filterJS(true)}</script>
+                        </head>
+                        <body></body>
+                    </html>
+                `
+                // iframe.style.display = 'none'
+                document.querySelector('#body-area').append(iframe)
 
-                // listen for console.logs
-                window.addEventListener("message", (event) => {
-                    const editor = state.editorFunctions.data.editor
-                    const type = event.data.type
-                    const message = event.data.message
-                    if (type == 'log') {
-                        editor.value += `\n${message}`
-                    }
-                    if (type == 'warn') {
-                        editor.value += `\n<u>${message}</u>`
-                    }
-                    console.log(event.data)
-                });
+                // // listen for console.logs -- depracated
+                // window.addEventListener("message", (event) => {
+                //     const editor = state.editorFunctions.data.editor
+                //     const type = event.data.type
+                //     const message = event.data.message
+                //     if (type == 'log') {
+                //         editor.value += `\n${message}`
+                //     }
+                //     if (type == 'warn') {
+                //         editor.value += `\n<u>${message}</u>`
+                //     }
+                //     console.log(event.data)
+                // });
 
                 const destroyConsoleServer = () => {
+                    state.runScriptFunctions.data.runningConsole = false
                     iframe.srcdoc = ''
-                    document.body.removeChild(iframe)
+                    state.enterFullScreen()
+                    document.querySelector('#body-area').removeChild(iframe)
                     left.removeChild(blinkingText)
                     right.removeChild(closeButton)
                     state.editorFunctions.loadEditor() // trigger a refresh of the console.
@@ -256,6 +278,7 @@ const state = {
                 const destroyWebsiteServer = () => {
                     document.body.removeChild(closeButton)
                     document.body.removeChild(iframe)
+                    state.enterFullScreen()
                     document.querySelector('#window').style.display = 'grid'
                     state.editorFunctions.loadEditor() // trigger a refresh of the console.
                 }
@@ -282,6 +305,7 @@ const state = {
                 state.editorFunctions.createLinkTabs()
                 state.menuFunctions.hideMenu()
             }
+            state.enterFullScreen()
         },
         load: () => {
             state.fileFunctions.getFile()
@@ -323,6 +347,9 @@ const state = {
                 export: function () {
                     return this.base(false, 'Export Project&nbsp;<i class="material-icons">terminal</i>')
                 },
+                fullscreen: function () {
+                    return this.base(false, 'Enter Fullscreen&nbsp;<i class="material-icons">fullscreen</i>')
+                },
                 back: function () {
                     return this.base(false, 'Go Back&nbsp;<i class="material-icons">undo</i>')
                 },
@@ -335,7 +362,7 @@ const state = {
             const window = document.querySelector('#window')
             window.style.display = 'grid'
         },
-        createMenu: (new_op = null, load_op = null, save_op = null, export_op = null, back_op = null) => {
+        createMenu: (new_op = null, load_op = null, save_op = null, export_op = null, fullscreen_op = null,back_op = null) => {
             const window = document.querySelector('#window')
             window.style.display = 'none'
             const menu = document.querySelector('#menu')
@@ -361,6 +388,10 @@ const state = {
                 menu.append(export_op)
                 export_op.addEventListener('click', () => state.controlFunctions.export())
             }
+            if (fullscreen_op) {
+                menu.append(fullscreen_op)
+                fullscreen_op.addEventListener('click', () => {state.enterFullScreen(); state.menuFunctions.hideMenu()})
+            }
             if (back_op) {
                 menu.append(back_op)
                 back_op.addEventListener('click', () => state.controlFunctions.back())
@@ -372,7 +403,7 @@ const state = {
         },
         createEditorMenu: () => {
             const data = state.menuFunctions.data
-            state.menuFunctions.createMenu(new_op = data.menuElements.new(), load_op = data.menuElements.load(), save_op = data.menuElements.save(), export_op = data.menuElements.export(), back_op = data.menuElements.back())
+            state.menuFunctions.createMenu(new_op = data.menuElements.new(), load_op = data.menuElements.load(), save_op = data.menuElements.save(), export_op = data.menuElements.export(), fullscreen_op = data.menuElements.fullscreen(),back_op = data.menuElements.back())
         }
     },
     fileFunctions: {
@@ -390,7 +421,7 @@ const state = {
             const downloadProjectName = stateData.projectName.replace(/ /g, "")
 
             const aDownloadTag = document.createElement('a')
-            const downloadData = new Blob([JSON.stringify(stateData)], { type: 'text/plain' })
+            const downloadData = new Blob([JSON.stringify(stateData)], { type: 'text/akrit' })
             aDownloadTag.href = URL.createObjectURL(downloadData)
             aDownloadTag.download = `${downloadProjectName}.akrit`
             aDownloadTag.click()
@@ -436,7 +467,7 @@ const state = {
             const html = state.runScriptFunctions.createWebsite(mode = 'no-dev')
 
             const aDownloadTag = document.createElement('a')
-            const downloadData = new Blob([html], { type: 'text/plain' })
+            const downloadData = new Blob([html], { type: 'text/html' })
             aDownloadTag.href = URL.createObjectURL(downloadData)
             aDownloadTag.download = `${state.props.projectName}.html`
             aDownloadTag.click()
@@ -501,6 +532,7 @@ const state = {
             document.querySelector('#keyboard').append(this.data.main)
 
             state.keyboardFunctions._createExtraKeys()
+            state.keyboardFunctions._showKeyboard()
         },
         _generateExtraKeys() {
             const fragment = document.createDocumentFragment();
@@ -683,6 +715,12 @@ const state = {
                 }
             }
         },
+        _hideKeyboard() {
+            state.keyboardFunctions.data.main.style.display = 'none'
+        },
+        _showKeyboard() {
+            state.keyboardFunctions.data.main.style.display = 'block'
+        }
 
     },
     setState(propName, propValue) {
@@ -696,6 +734,9 @@ const state = {
             return
         }
     },
+    enterFullScreen() {
+        document.documentElement.requestFullscreen()
+    },
     init() {
         state.menuFunctions.createStartMenu()
         const editorData = state.editorFunctions.data
@@ -704,6 +745,7 @@ const state = {
             state.editorFunctions.updateSelection()
             if (e.keyCode == 9) {
                 e.preventDefault() // prevent tab from leaving input field
+                state.editorFunctions.addCharacters('    ')
                 // now add tab space
             }
         })

@@ -32,6 +32,7 @@
 .keyboard_key:active {
     opacity: 0.7;
     background-color: var(--color-vibrant-1);
+    -webkit-tap-highlight-color: var(--color-vibrant-1);
 }
 .keyboard_key--wide {
     width: 12%;
