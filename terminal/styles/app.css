@@ -37,19 +37,19 @@ html {
 
 #window {
     display: grid;
-    grid-template-rows: 2.5rem auto calc((2.5 + 2 * 0.2) * 5rem + 2rem);
+    grid-template-rows: 2.5rem auto 10px;
     width: 100vw;
     height: 100vh;
     grid-gap: 1rem;
     margin: auto;
-    max-width: 900px;
+    max-width: 1000px;
     transition: 0.1s;
 }
 
 #menu {
     width: fit-content;
     margin: auto;
-    margin-top: 5rem;
+    margin-top: 2.5rem;
     display: grid;
     justify-items: center;
 }
@@ -74,4 +74,9 @@ html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+@media (pointer:coarse) {
+    #window {
+        grid-template-rows: 2.5rem auto calc((2.5 + 2 * 0.2) * 5rem + 2rem);
+    }
 }

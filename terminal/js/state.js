@@ -72,6 +72,7 @@ const state = {
             const endPos = state.editorFunctions.data.endPos
             const editor = state.editorFunctions.data.editor
             const value = editor.value
+            if (startPos == 0) return
             editor.value = value.slice(0, startPos-1) + value.slice(endPos, value.length)
             // update selection
             editor.selectionStart = startPos -1
@@ -208,20 +209,6 @@ const state = {
                 `
                 // iframe.style.display = 'none'
                 document.querySelector('#body-area').append(iframe)
-
-                // // listen for console.logs -- depracated
-                // window.addEventListener("message", (event) => {
-                //     const editor = state.editorFunctions.data.editor
-                //     const type = event.data.type
-                //     const message = event.data.message
-                //     if (type == 'log') {
-                //         editor.value += `\n${message}`
-                //     }
-                //     if (type == 'warn') {
-                //         editor.value += `\n<u>${message}</u>`
-                //     }
-                //     console.log(event.data)
-                // });
 
                 const destroyConsoleServer = () => {
                     state.runScriptFunctions.data.runningConsole = false
@@ -485,28 +472,20 @@ const state = {
             extraKeysIndex: 0,
             extraKeys: [
                 {
-                    titleIcon: 'numbers',
+                    titleIcon: 'numbers', // numbers
                     keys: [['1',''], ['2', ''], ['3', ''], ['4', ''], ['5', ''], ['6', ''], ['7', ''], ['8', ''], ['9', ''], ['0', '']]
                 },
                 {
                     titleIcon: 'calculate', // logic
-                    keys: [['+', ''], ['-', ''], ['/', ''], ['*', ''], ['=', ''], ['==', ''], ['(', ''], [')', ''], ['|', ''], ['&', ''],]
+                    keys: [['+', ''], ['-', ''], ['/', ''], ['*', ''], ['=', ''], ['"', ''], ["'", ''], ["`", ''], ['|', ''], ['&', ''],]
                 },
                 {
-                    titleIcon: 'format_paint', // css
-                    keys: [['<', ''], ['>', ''],['%', ''], ['#', ''], ['!', ''], ['@', ''], [':', ''], [';', ''], ['{', ''], ['}', '']]
+                    titleIcon: 'data_object', // brackets
+                    keys: [['<', ''], ['>', ''], ['(', ''], [')', ''], ['{', ''], ['}', ''], ['[', ''], [']', '']]
                 },
                 {
-                    titleIcon: 'archive',
-                    keys: [['const', 'keyboard_key--wide'], ['let', 'keyboard_key--wide'], ['var', 'keyboard_key--wide'], ['=', ''], [':', ''],['"', ''], ["'", ''], ['`', '']]
-                },
-                {
-                    titleIcon: 'build_circle',
-                    keys: [['<', ''], ['="', 'keyboard_key--wide'], ['"', ''], ['>', ''], ['</', 'keyboard_key--wide']]
-                },
-                {
-                    titleIcon: 'info', // all the ways to comment
-                    keys: [['/*', ''], ['*/', ''], ['//', ''], ['<!--', 'keyboard_key--wide'], ['-->', 'keyboard_key--wide']]
+                    titleIcon: 'monetization_on', // symbols
+                    keys: [['!', ''], ['£', ''], ['$', ''], ['%', ''], ['^', ''], ['#', ''], [':', ''], [';', ''], ['@', '']]
                 }
             ]
         },
@@ -615,17 +594,14 @@ const state = {
                     case "backspace":
                         keyElement.classList.add('keyboard_key--wide')
                         keyElement.innerHTML = createIconHTML("backspace")
-                        keyElement.addEventListener("click", () => {
-                            // const currentValue = this.properties.value;
-                            // const currentStartPos = this.elements.textarea.selectionStart
-                            // const currentEndPos = this.elements.textarea.selectionEnd
-                            // console.log(currentStartPos, currentEndPos)
-                            // let newValue = currentValue.slice(0, currentStartPos - 1) + currentValue.slice(currentEndPos, currentValue.length - currentEndPos - currentStartPos);
-                            // this.properties.value = newValue
-                            // console.log(newValue)
-                            // this._triggerEvent('oninput')
-                            state.editorFunctions.deleteCharacters('\n')
-                        })
+                        let shouldDelete = false
+                        const interval = setInterval(() => {
+                            if (shouldDelete) state.editorFunctions.deleteCharacters()
+                        }, 150)
+                        keyElement.addEventListener("mousedown", () => { shouldDelete = true })
+                        keyElement.addEventListener("mouseup", ()=> { shouldDelete = false })
+                        keyElement.addEventListener("touchstart", () => { shouldDelete = true })
+                        keyElement.addEventListener("touchend", ()=> { shouldDelete = false })
                         break;
                     case "caps":
                         keyElement.classList.add('keyboard_key--wide', 'keyboard_key--activatable')
