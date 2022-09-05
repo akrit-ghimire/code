@@ -357,7 +357,7 @@ const state = {
             menu.style.display = 'grid'
             // push elements
             const logo = document.createElement('h1')
-            logo.textContent = 'AkritBox'
+            logo.textContent = 'Sandbox'
             menu.append(logo)
             if (new_op) {
                 menu.append(new_op)
@@ -403,12 +403,13 @@ const state = {
         saveToFile: () => {
             // save editor
             state.editorFunctions.saveEditor(state.props.currentEditor)
+            const projectName = prompt('Please enter a file name for your project.')
 
             const stateData = {
-                projectName: prompt('Please enter a file name for your project.'),
+                projectName,
                 data: state.props.data
             }
-            const downloadProjectName = stateData.projectName.lenght > 1 ? stateData.projectName.replace(/ /g, "") : 'AkritBoxSaveFile'
+            const downloadProjectName = stateData.projectName.length > 1 ? stateData.projectName.replace(/ /g, "") : 'SandboxSaveFile-' + new Date().toLocaleDateString()
 
             const aDownloadTag = document.createElement('a')
             const downloadData = new Blob([JSON.stringify(stateData)], { type: 'text/akrit' })
@@ -456,10 +457,13 @@ const state = {
 
             const html = state.runScriptFunctions.createWebsite(mode = 'no-dev')
 
+            const projectName = prompt('Please enter a file name for your project export.')
+            const downloadProjectName = projectName.length > 1 ? projectName.replace(/ /g, "") : 'SandboxSaveFile-' + new Date().toLocaleDateString()
+
             const aDownloadTag = document.createElement('a')
             const downloadData = new Blob([html], { type: 'text/html' })
             aDownloadTag.href = URL.createObjectURL(downloadData)
-            aDownloadTag.download = `${state.props.projectName}.html`
+            aDownloadTag.download = `${downloadProjectName}.html`
             aDownloadTag.click()
         }
     },
@@ -571,7 +575,7 @@ const state = {
         _createKeys() {
             const fragment = document.createDocumentFragment();
             const keyLayout = [
-                "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
+                "<>","q", "w", "e", "r", "t", "y", "u", "i", "o", "p","</>",
                 "tab", "a", "s", "d", "f", "g", "h", "j", "k", "l", "backspace",
                 "caps", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?", "enter",
                 "left", "space", "right",
@@ -585,7 +589,7 @@ const state = {
             // Loop
             keyLayout.forEach(key => {
                 const keyElement = document.createElement("div")
-                const insertLineBreakAt = ["change", "p", "backspace", "enter"].indexOf(key) !== -1;
+                const insertLineBreakAt = ["change", "</>", "backspace", "enter"].indexOf(key) !== -1;
 
                 // Add classes
                 keyElement.classList.add('keyboard_key')
