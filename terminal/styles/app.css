@@ -1,8 +1,8 @@
 :root {
-    --color-dark: #161a3f;
-    --color-dark-light: #1d2563;
-    --color-dark-contrast: #6529a3;
-    --color-vibrant-1: #ea1f63;
+    --color-dark: rgb(22, 26, 63);
+    --color-dark-light: rgb(29, 37, 99);
+    --color-dark-contrast: rgb(102, 41, 163);
+    --color-vibrant-1: rgb(234, 31, 99);
     --color-vibrant-2: #a0dd3d;
 }
 html { 

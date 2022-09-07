@@ -256,6 +256,7 @@ const state = {
                 iframe.sandbox.add('allow-scripts')
                 iframe.sandbox.add('allow-modals')
                 iframe.sandbox.add('allow-popups')
+                // iframe.sandbox.add('allow-top-navigation') for a tags
                 iframe.srcdoc = state.runScriptFunctions.createWebsite()
                 iframe.id = 'iframe'
                 document.body.append(iframe)
@@ -721,7 +722,8 @@ const state = {
         document.documentElement.requestFullscreen()
     },
     init() {
-        state.menuFunctions.createStartMenu()
+        // state.menuFunctions.createStartMenu()
+        state.controlFunctions.new()
         const editorData = state.editorFunctions.data
 
         editorData.editor.addEventListener('keydown', (e) => {
