@@ -602,7 +602,7 @@ const state = {
                         let shouldDelete = false
                         const interval = setInterval(() => {
                             if (shouldDelete) state.editorFunctions.deleteCharacters()
-                        }, 150)
+                        }, 150) // edit this in future
                         keyElement.addEventListener("mousedown", () => { shouldDelete = true })
                         keyElement.addEventListener("mouseup", ()=> { shouldDelete = false })
                         keyElement.addEventListener("touchstart", () => { shouldDelete = true })
