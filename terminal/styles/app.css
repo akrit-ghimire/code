@@ -81,8 +81,24 @@ html {
     padding: 0;
     box-sizing: border-box;
 }
+
+#error {
+    display: none;
+    color: white;
+    margin: 50px;
+    text-align: center;
+}
+#error strong {
+    color: var(--color-vibrant-1)
+}
+
 @media (pointer:coarse) {
     #editor_window {
         grid-template-rows: 2.5rem auto calc((2.5 + 2 * 0.2) * 5rem + 2rem);
     }
+}
+
+@media only screen and (max-width: 650px) {
+    #root {display: none}
+    #error {display: block;}
 }
