@@ -4,7 +4,7 @@
     overflow: hidden;
 }
 .keyboard {
-    background-color: transparent;
+    /* background-color: transparent; */
     user-select: none;
 }
 .keyboard_keys {

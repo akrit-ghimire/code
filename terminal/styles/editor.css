@@ -17,3 +17,15 @@
 ::-webkit-scrollbar-track { background: var(--color-dark-light); }
 ::-webkit-scrollbar-thumb { background: var(--color-dark-contrast); }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-vibrant-1); }
+
+#emulatorCloseButton {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    width: 3rem;
+    height: 3rem;
+    opacity: 0.3;
+    text-align: center;
+    z-index: 999;
+    padding: 0;
+}

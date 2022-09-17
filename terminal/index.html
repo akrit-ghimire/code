@@ -4,53 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>Sandbox</title>
-    <link rel="icon" type="image/x-icon" href="/styles/logo.png">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="styles/app.css">
-    <link rel="stylesheet" href="styles/tabs.css">
-    <link rel="stylesheet" href="styles/editor.css">
-    <link rel="stylesheet" href="styles/keyboard.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- <link rel="stylesheet" href="./styles/app.css">
+    <link rel="stylesheet" href="./styles/tabs.css">
+    <link rel="stylesheet" href="./styles/editor.css">
+    <link rel="stylesheet" href="./styles/keyboard.css"> -->
 </head>
 <body>
-    <script src="js/state.js" defer></script>
-    <div id="window"  style="display: none" class="px-1 py-1">
-        <div id="tabs">
-            <div id="left-tabs">
-            </div>
-            <div id="right-tabs">
-                <div class="tab px-2 fill-n hover" onclick="state.runScriptFunctions.runWebsite()" data-hide-command-subscriber>
-                    <span>Run&nbsp;<i class="material-icons">code</i></span>
-                </div>
-                <!-- <div class="tab px-2 fill-n hover" onclick="state.runScriptFunctions.runConsole()" data-hide-command-subscriber>
-                    <span>Run Console&nbsp;<i class="material-icons">data_object</i></span>
-                </div> -->
-                <div class="tab px-2 fill-n hover" onclick="state.menuFunctions.createEditorMenu()" data-hide-command-subscriber>
-                    <span><i class="material-icons">more_horiz</i></span>
-                </div>
-            </div>
-        </div>
-        <div id="body-area">
-            <textarea id="editor" data-hide-command-subscriber inputmode="none" spellcheck="false" class="outline px-1 py-1"></textarea>
-        </div>
-        <div id="keyboard">
-        </div>
-    </div>
-    <div id="menu">
-        <h1>AkritBox</h1>
-        <div class="tab px-4 fill-a hover">
-            <span>New Project&nbsp;<i class="material-icons">code</i></span>
-        </div>
-        <div class="tab px-4 fill-n hover">
-            <span>Load Project&nbsp;<i class="material-icons">file_upload</i></span>
-        </div>
-        <div class="tab px-4 fill-n hover">
-            <span>Save Project&nbsp;<i class="material-icons">file_download</i></span>
-        </div>
-        <div class="tab px-4 fill-n hover">
-            <span>Go Back&nbsp;<i class="material-icons">undo</i></span>
-        </div>
-    </div>
+    <script src="./index.js" type="module" defer></script>
+    <div id="root"></div>
 </body>
 </html>

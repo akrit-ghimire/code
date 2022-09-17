@@ -35,7 +35,7 @@ html {
 .fill-a {background-color: var(--color-dark-contrast);}
 
 
-#window {
+#editor_window {
     display: grid;
     grid-template-rows: 2.5rem auto 10px;
     width: 100vw;
@@ -45,7 +45,13 @@ html {
     max-width: 1000px;
     transition: 0.1s;
 }
-
+#emulator {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+    padding: 0;
+}
 #menu {
     width: fit-content;
     margin: auto;
@@ -76,7 +82,7 @@ html {
     box-sizing: border-box;
 }
 @media (pointer:coarse) {
-    #window {
+    #editor_window {
         grid-template-rows: 2.5rem auto calc((2.5 + 2 * 0.2) * 5rem + 2rem);
     }
 }
