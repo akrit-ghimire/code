@@ -1,0 +1,17 @@
+i.confetti {
+    position: absolute;
+    display: block;
+    left: 50%;
+    top: 50%;
+    width: 5px;
+    height: 8px;
+    opacity: 0;
+    animation: confetti 1.5s ease-out forwards;
+}
+
+@keyframes confetti {
+    from {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
