@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Club - Help Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="./index.js" defer></script>
+</head>
+
+<body>
+    <section class="page" id="menu">
+    </section>
+    <section class="page" id="page">
+        <div class="sticky_top">
+            <button onclick="page_changer.change_to_menu()"><i class="material-icons">menu</i></button>
+            <button id="back" onclick="page_changer.move_slide(-1)"><i class="material-icons">arrow_back</i></button>
+            <span id="page_info">0 of 20</span>
+            <button id="forward" onclick="page_changer.move_slide(1)"><i class="material-icons">arrow_forward</i></button>
+        </div>
+        <md></md>
+    </section>
+</body>
+
+</html>

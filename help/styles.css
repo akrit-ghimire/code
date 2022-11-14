@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+
+html {
+    font-family: 'Open Sans', sans-serif;
+}
+
+:root {
+    --color-dark: rgb(22, 26, 63);
+    --color-dark-light: rgb(29, 37, 99);
+    --color-dark-contrast: rgb(102, 41, 163);
+    --color-vibrant-1: rgb(234, 31, 99);
+    --color-vibrant-2: #a0dd3d;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    font-family: sans-serif;
+    background-color: var(--color-dark)
+}
+
+.page {
+    width: 100%;
+    max-width: 50rem;
+}
+
+.item {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+
+    border: thin solid var(--color-dark-contrast);
+    border-radius: 8px;
+    overflow: hidden;
+
+    margin-top: 1rem;
+    cursor: pointer;
+}
+.item:hover {
+    border: thin solid var(--color-vibrant-1);
+}
+
+.numbered {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-dark-light);
+    font-size: 1rem;
+    color: white;
+}
+
+.text {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    width: 100%;
+    color: var(--color-vibrant-2);
+    line-height: 1.1rem;
+}
+
+.text h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.text p {
+    margin: 0;
+    margin-top: 01rem;
+    font-size: 1rem;
+}
+
+.left {
+    padding: 2rem;
+}
+
+.right {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.right button {
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    color: var(--color-vibrant-2);
+    background-color: var(--color-dark-light);
+    border-radius: 8px;
+    border: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.right button:hover {
+    border: thin solid var(--color-vibrant-2);
+}
+
+.sticky_top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: var(--color-dark-light);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.sticky_top button {
+    width: auto;
+    padding: 0.25rem 0.5rem;
+    margin: 4px;
+    border: thin solid var(--color-dark-light);
+    background-color: transparent;
+    color: var(--color-vibrant-1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 8px;
+}
+.sticky_top span {
+    color: var(--color-vibrant-1);
+    margin: 0 0.5rem;
+}
+.sticky_top button:disabled {
+    color: var(--color-dark);
+    cursor: not-allowed;
+}
+.sticky_top button:enabled:hover {
+    border: thin solid var(--color-vibrant-1);
+}
+#page {
+    margin-top: 1rem;
+}
+
+/* markdown styles */
+md h1, md h2, md h3 {
+    color: var(--color-vibrant-2);
+    margin: 0;
+    margin-top: 6rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+md {
+    color: white;
+    line-height: 2.5rem;
+    text-align: justify;
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+md code {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--color-vibrant-1);
+    border-radius: 8px;
+    padding: 0 2rem;
+    display: block;
+    text-align: left;
+    border: thin solid var(--color-vibrant-1);
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+md img {
+    display: block;
+    width: 100%;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+}
+
+md a {
+    text-decoration: none;
+    color: var(--color-vibrant-1);
+    cursor: pointer;
+}
+md a:hover {
+    color: var(--color-dark-contrast);
+}
+
+md .next {
+    width: auto;
+    padding: 0.75rem 2rem;
+    margin: 4rem auto;
+    border: 0;
+    background-color: transparent;
+    color: var(--color-vibrant-2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+}
+md .next i {
+    margin-left: 0.25rem;
+}
+md .next:hover {
+    color: var(--color-dark-contrast);
+}
