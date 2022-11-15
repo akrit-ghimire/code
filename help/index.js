@@ -25,8 +25,9 @@ const page_viewer = {
         .replace(/^### (.*$)/gim, '<h3>$1</h3>') // h3 tag
         .replace(/^## (.*$)/gim, '<h2>$1</h2>') // h2 tag
         .replace(/^# (.*$)/gim, '<h1>$1</h1>') // h1 tag
+        .replace(/\*\*\*(.*)\*\*\*/gim, '<i>$1</i>') // italic text
         .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>') // bold text
-        .replace(/\*(.*)\*/gim, '<i>$1</i>'); // italic text
+        .replace(/\*(.*)\*/gim, '<span class="highlight">$1</span>') // highlight text
 
         return toHTML.trim(); // using trim method to remove whitespace
         // code originally by Randolph Perkins - Medium Article
@@ -107,18 +108,3 @@ const menu_loader = {
         `).join('')
     }
 }
-
-// import pages
-menu_loader.import(
-    title='Lesson 1', 
-    desc='What is HTML? You will learn this as well as making your first ever website!', 
-    src='1.what.is.html.md'
-)
-menu_loader.import(
-    title='Poem Activity', 
-    desc="Practice the skills you've learnt from Lesson 1 by making a website that displays a poem.", 
-    src='hello.md'
-)
-// load the menu
-menu_loader.load()
-page_changer.change_to_menu()

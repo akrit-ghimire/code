@@ -9,7 +9,7 @@ html {
     --color-dark-light: rgb(29, 37, 99);
     --color-dark-contrast: rgb(102, 41, 163);
     --color-vibrant-1: rgb(234, 31, 99);
-    --color-vibrant-2: #a0dd3d;
+    --color-vibrant-2: hsl(83, 70%, 55%);
 }
 
 body {
@@ -173,6 +173,9 @@ md code {
     margin: 1rem 0;
     overflow-x: auto;
 }
+.highlight {
+    background-color: rgb(234, 31, 99, .2);
+}
 
 md img {
     display: block;
@@ -211,3 +214,9 @@ md .next i {
 md .next:hover {
     color: var(--color-dark-contrast);
 }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--color-dark-light); }
+::-webkit-scrollbar-thumb { background: var(--color-dark-contrast); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-vibrant-1); }
