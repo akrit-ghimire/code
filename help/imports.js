@@ -24,6 +24,11 @@ menu_loader.import(
     desc="You will tie together all the things you have learnt so far by making a cat toy shop website for Olivia", 
     src='5.project.cat.toy.shop.md'
 )
+menu_loader.import(
+    title='Lesson 3: What Is CSS', 
+    desc="You will learn how to make your websites look nicer with a new coding language called CSS", 
+    src='6.what.is.css.md'
+)
 // load the menu
 menu_loader.load()
 page_changer.change_to_menu()
