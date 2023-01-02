@@ -1,303 +1,255 @@
-import {
-    renderRoot,
-    renderComponent,
-    setTitle,
-    useState,
-    setStyle,
-    setIcon,
-    useEvent
-} from './libraries/MICRO-REACT-DOM.js'
+// BUTTONS
+const save_btn = document.getElementById('save_btn')
+const load_btn = document.getElementById('load_btn')
+const new_btn = document.getElementById('new_btn')
+const run_btn = document.getElementById('run_btn')
+const tutorial_btn = document.getElementById('tutorial_btn')
+const menu_btn = document.getElementById('menu_btn')
+const forward_btn = document.getElementById('forward_btn')
+const backward_btn = document.getElementById('backward_btn')
+const close_btn = document.getElementById('close_btn')
+// PAGES
+const run_page = document.getElementById('run-page')
+const code_page = document.getElementById('code-page')
+const tutorial_page = document.getElementById('help-page')
+// SUB PAGES
+const menu_sub_page = document.getElementById('menu-sub-page')
+const article_sub_page = document.getElementById('article-sub-page')
+// CONTROL BAR
+const cb_hint = document.getElementById('cb-hint')
+const cb_controls = document.getElementById('cb-controls')
+const page_indicator = document.getElementById('page_indicator')
+// MISC
+const textarea = document.querySelector('textarea')
+const lesson_list = document.querySelector('lesson-list')
+const ide = document.getElementById('ide')
+const control_bar = document.getElementById('control-bar')
+const title = document.getElementById('title')
+const icon = document.getElementById('icon')
+// SCRIPT
+const app = {
+    icon: (name) => `<i class="material-icons">${name}</i>`,
+    data: {
+        iframe: null,
+        code: '',
+    },
+    open: {
+        run_page: () => {
+            ide.style.display = 'none'
+            run_page.style.display = 'block'
+            // create iframe and append to runpage
+            app.data.iframe = document.createElement('iframe')
+            app.data.code = textarea.value
+            app.data.iframe.srcdoc = app.data.code
+            run_page.append(app.data.iframe)
+            title.innerText = 'Terminal'
+            icon.href = './data/logo.png'
 
-import Editor from './components/Editor.js'
-import Menu from './components/Menu.js'
-import Emulator from './components/Emulator.js'
-
-let tempEditorValue = '' // by default
-let editor
-let selectionStart = 0
-let selectionEnd = 0
-
-const defaultFileData = {
-    'html': '<!--This is a comment, delete this if you want-->',
-    'css': '/* This is a comment, delete this if you want */',
-    'js': '/* This is a comment, delete this if you want */'
-}
-
-const App = name => () => {
-    const [editorVisibility, setEditorVisibility] = useState(true)
-    const [menuVisibility, setMenuVisibility] = useState(false)
-    const [emulatorVisibility, setEmulatorVisibility] = useState(false)
-
-    const [fileData, setFileData] = useState(defaultFileData)
-    const [activeTab, setActiveTab] = useState('html')
-    const setEditorData = () => {
-        const editorData = fileData[activeTab]
-        tempEditorValue = editorData
-        return editorData
-    }
-    const [editorValue, setEditorValue] = useState(setEditorData())
-
-    
-    // Header Tab Functions
-    const saveTab = () => {
-        setFileData(prevData => {
-            const newData = {...prevData}
-            newData[activeTab] = tempEditorValue
-            return newData
-        })
-    }
-    const changeTab = (tabName) => {
-        saveTab()
-        const newTabData = fileData[tabName]
-        tempEditorValue = newTabData
-        setEditorValue(newTabData)
-        setActiveTab(tabName)
-    }
-    const updateEditorValue = (currentValue) => tempEditorValue = currentValue 
-    const createWebsite = () => {
-        const cssReference = '<link href="./styles.css" rel="stylesheet">'
-        const jsReference = '<script src="./script.js"></script>'
-        const splashHTML = '<!-- HTML, CSS & JS files collated with Sandbox (Software Made By Akrit Ghimire) -->'
-        
-        let html = fileData['html'].replace(/\n/g, "")
-        let css = fileData['css'].replace(/\n/g, "")
-        let js = fileData['js'].replace(/\n/g, ";")
-
-        if (html.search(cssReference > -1)) {
-            html = html.replace(cssReference, `
-                <!--${cssReference}-->
-                <!-- For External stylesheets, uncomment the above and put the styles (from below) in a separate stylesheet named 'styles.css' in the same folder.-->
-                <style>${css}</style>
-            `)
-        }
-        if (html.search(jsReference > -1)) {
-            html = html.replace(jsReference, `
-                <!--${jsReference}-->
-                <!-- For External javascript files, uncomment the above and put the script (from below) in a separate js script file named 'script.js' in the same folder.-->
-                <script defer>${js}</script>
-            `)
-        }
-        return html + splashHTML
-    }
-    const runWebsite = () => {
-        changeTab(activeTab == 'html' ? 'css' : 'html') // save tab data on menu open
-        
-        setEditorVisibility(false)
-        setEmulatorVisibility(true)
-    }
-
-
-
-    // Emulator Functions
-    useEvent(() => {
-        if (!emulatorVisibility) return
-
-        const iframe = document.getElementById('iframe')
-        iframe.srcdoc = createWebsite()
-        console.log(iframe.srcdoc)
-        return () => {}
-    })
-    const closeEmulator = () => {
-        setEmulatorVisibility(false)
-        setEditorVisibility(true)
-    }
-    const openMenu = () => {
-        changeTab(activeTab == 'html' ? 'css' : 'html') // save tab data on menu open
-        setEditorVisibility(false)
-        setMenuVisibility(true)
-    }
-
-
-
-    // Menu Page Functions
-    const closeMenu = () => {
-        setEditorVisibility(true)
-        setMenuVisibility(false)
-    }
-    const loadProject = (data) => {
-        setFileData(data)
-        setActiveTab('html')
-        setEditorValue(data['html'])
-        closeMenu()
-    }
-    const newProject = () => {
-        if (window.confirm('Creating a new project will overwrite the current project. Do you wish to continue?')) loadProject(defaultFileData)
-    }
-    const getProjectFile = () => {
-        // create input element
-        const fileInput = document.createElement('input')
-        fileInput.type = 'file'
-        fileInput.accept = '.akrit'
-        // open file explorer
-        fileInput.onchange = () => {
-            const validFile = [...fileInput.files].filter((file) => 'text/akrit'.includes(file.type));
-            // input validation
-            if (validFile.length < 1) {
-                alert('This is not a valid project file.')
-                return
+            let extracted_title = app.data.code.match(/^<title>(.*)<\/title>/gim) || [] // change title
+            if (extracted_title.length > 0) {
+                title.innerText = extracted_title[0].replace(/^<title>(.*)<\/title>/gim, '$1')
+            } 
+            let extracted_icon = app.data.code.match(/^<link rel="icon" href="(.*)" type="image\/x-icon">/gim) || [] // change icon
+            if (extracted_icon.length > 0) {
+                icon.href = extracted_icon[0].replace(/^<link rel="icon" href="(.*)" type="image\/x-icon">/gim, '$1')
             }
-            const file = fileInput.files[0]
-            // read file
-            const fileReader = new FileReader()
-            fileReader.readAsText(file)
-            fileReader.addEventListener('load', (e) => {
-                // load project
-                loadProject(JSON.parse(e.target.result))
+
+        },
+        ide: () => {
+            ide.style.display = 'flex'
+            run_page.style.display = 'none'
+            if (app.data.iframe) { // delete iframe
+                run_page.removeChild(app.data.iframe)
+            }
+            title.innerText = 'Terminal'
+            icon.href = './data/logo.png'
+        },
+        tutorial: () => {
+            tutorial_page.style.width = '100%'
+            tutorial_btn.innerHTML = app.icon('close')
+            app.dependant_padding()
+        },
+        menu: () => {
+            cb_controls.style.display = 'none'
+            cb_hint.style.display = 'block'
+            menu_sub_page.style.display = 'flex'
+            article_sub_page.style.display = 'none'
+        },
+        article: () => {
+            cb_controls.style.display = 'flex'
+            cb_hint.style.display = 'none'
+            menu_sub_page.style.display = 'none'
+            article_sub_page.style.display = 'block'
+        },
+        load: () => {
+            if (window.confirm('Loading will delete any unsaved data!')) {
+                // load file
+                app.save()
+                file_manager.load()
+            }
+        },
+        save: () => {
+            app.save()
+            if (file_manager.file == null) file_manager.save_as()
+            else file_manager.save() 
+        },
+        new: () => {
+            if (window.confirm('Creating a new file will delete any unsaved data!')) {
+                // load file
+                textarea.value = ''
+                app.data.code = ''
+                file_manager.clear_file()
+                app.notify('Successfully created new file!')
+            }
+        }
+    },
+    close: {
+        tutorial: () => {
+            tutorial_page.style.width = '0%'
+            tutorial_btn.innerText = 'Tutorials'
+            app.dependant_padding()
+        }
+    },
+    toggle: {
+        state: {
+            tutorial: false
+        },
+        tutorial: () => {
+            if (app.toggle.state.tutorial) {
+                app.toggle.state.tutorial = false
+                app.close.tutorial()
+            } else {
+                app.toggle.state.tutorial = true
+                app.open.tutorial()
+            }
+        }
+    },
+    loader: {
+        pages: [],
+        slide_elems: [],
+        slide: 0,
+        slide_length: 0,
+        import: (title, src) => {
+            app.loader.pages.push({title, src})
+        },
+        create_link: ({title, src}) => `
+            <lesson onclick="app.loader.load_page('${src}')">
+                <p>${title}</p>
+                <span><i class="material-icons">start</i></span>
+            </lesson>
+        `,
+        load_page: (src) => {
+            app.open.article()
+            md.read(src)
+            app.loader.slide = 0
+            app.loader.slide_elems = Array.from(document.querySelectorAll('[data-page]'))
+            app.loader.slide_length = app.loader.slide_elems.length
+            app.loader.page_back() // ensures starts at 0
+        },
+        load_menu: () => {
+            app.loader.pages.forEach(page => {
+                lesson_list.insertAdjacentHTML('beforeend', app.loader.create_link(page))
             })
-        }
-        fileInput.click()
-    }
-    const downloadProject = (data, downloadName, fileExtension, type, defaultPrefix) => {
-        const downloadProjectName = downloadName.length > 1 ? downloadName.replace(/ /g, "") : defaultPrefix + new Date().toLocaleDateString()
-        const aDownloadTag = document.createElement('a')
-        const downloadData = new Blob([type == 'text/html' ? data : JSON.stringify(data)], { type })
-        aDownloadTag.href = URL.createObjectURL(downloadData)
-        aDownloadTag.download = `${downloadProjectName}${fileExtension}`
-        aDownloadTag.click()
-        closeMenu()
-    }
-    const saveProject = () => {
-        const projectName = prompt('Please enter a file name for your project.')
-        downloadProject(
-            fileData,
-            projectName,
-            '.akrit',
-            'text/akrit',
-            'SandboxSaveFile-'
-        )
-        
-    }
-    const exportProject = () => {
-        const htmlFile = createWebsite()
+        },
+        page_transition_pre: () => {
+            app.loader.slide_elems[app.loader.slide].style.display = 'none' // hide current page
+            forward_btn.disabled = false // reset buttons to default state
+            backward_btn.disabled = false
+        },
+        page_transition_post: () => {
+            app.loader.slide_elems[app.loader.slide].style.display = 'block' // show next page
+            page_indicator.innerText = `${app.loader.slide+1} of ${app.loader.slide_length}`
+            article_sub_page.scrollTo(0, 0) // scroll to top when next page clicked
+        },
+        page_next: () => {
+            app.loader.page_transition_pre()
 
-        const projectName = prompt('Please enter a file name for your project export.')
-        downloadProject(
-            htmlFile,
-            projectName,
-            '.html',
-            'text/html',
-            'SandboxExportFile-'
-        )
-    }
-
-
-
-
-    // Keyboard Functions
-    useEvent(() => {
-        editor = document.getElementById('editor')
-        editor.addEventListener('click', () => {
-            selectionStart = editor.selectionStart
-            selectionEnd = editor.selectionEnd
-        })
-        editor.addEventListener('keydown', (e) => {
-            if (e.key == "Tab") {
-                e.preventDefault()
-                addCharacter('    ')
+            app.loader.slide += 1
+            if (app.loader.slide >= app.loader.slide_length) {
+                app.loader.slide -= 1 // resets to previous value
+                forward_btn.disabled = true
             }
-            if (e.key == "Backspace" && isATabSpace()) {
-                e.preventDefault()
-                deleteCharacter()
+
+            app.loader.page_transition_post()
+        },
+        page_back: () => {
+            app.loader.page_transition_pre()
+
+            app.loader.slide -= 1
+            if (app.loader.slide < 0) {
+                app.loader.slide = 0
+                backward_btn.disabled = true
             }
-        })
-        return () => {}
-    })
-    const focusEditor = () => {
-        if (editor) {
-            editor.selectionStart = selectionStart
-            editor.selectionEnd = selectionEnd
-            editor.focus()
+
+            app.loader.page_transition_post()
         }
-    }
-    const addCharacter = (characters) => {
-        const startPos = editor.selectionStart
-        const endPos = editor.selectionEnd
-        tempEditorValue = tempEditorValue.slice(0, startPos) + characters + tempEditorValue.slice(endPos, tempEditorValue.length)
-        // update selection
-        selectionStart = startPos + characters.length
-        selectionEnd = endPos + characters.length
-        saveTab()
-        setEditorValue(tempEditorValue)
-        focusEditor()
-    }
-    const isATabSpace = () => {
-        if (tempEditorValue.slice(editor.selectionStart-4, editor.selectionEnd) == '    ') return true
-        return false
-    }
-    const deleteCharacter = () => {
-        const startPos = editor.selectionStart
-        const endPos = editor.selectionEnd
+    },
+    notify: (message) => {
+        const existingToasts = Array.from(document.querySelectorAll('toast'))
+        let shouldCreate = true
+        existingToasts.forEach(toast => {
+            if (toast.innerText == message) shouldCreate = false
+        })
+        if (shouldCreate) {
+            const toast = document.createElement('toast')
+            toast.innerText = message
+            document.body.append(toast)
+            setTimeout(() => {document.body.removeChild(toast)}, 5000)
+        }
+    },
+    save: () => {
+        app.data.code = textarea.value
+    },
+    dependant_padding: () => {
+        if (window.innerWidth > 900 && app.toggle.state.tutorial !== true) {
+            code_page.style.paddingLeft = '16vw'
+            code_page.style.paddingRight = '16vw'
+        } else {
+            code_page.style.paddingLeft = '1.5rem'
+            code_page.style.paddingRight = '1.5rem'
+        }
+    },
+    media_queries: () => {
+        if (window.innerWidth < 1000) {
+            tutorial_btn.disabled = true
+            app.close.tutorial()
+            app.toggle.state.tutorial = false
+            app.notify('Tutorial disabled: Browser too small.')
+        } else {
+            tutorial_btn.disabled = false
+        }
+        app.dependant_padding()
+    },
+    init: () => {
+        app.open.ide()
+        app.open.menu()
+        app.close.tutorial()
+        app.media_queries()
+        // eventlisteners
+        run_btn.addEventListener('click', app.open.run_page)
+        close_btn.addEventListener('click', app.open.ide)
+        tutorial_btn.addEventListener('click', app.toggle.tutorial)
+        menu_btn.addEventListener('click', app.open.menu)
+        forward_btn.addEventListener('click', app.loader.page_next)
+        backward_btn.addEventListener('click', app.loader.page_back)
+        load_btn.addEventListener('click', app.open.load)
+        save_btn.addEventListener('click', app.open.save)
+        new_btn.addEventListener('click', app.open.new)
 
-        if (startPos == 0) return
-        let sliceVal = isATabSpace() ? 4 : 1 // delete only one space by default but 4 if is a tab space
-
-        tempEditorValue = tempEditorValue.slice(0, startPos-sliceVal) + tempEditorValue.slice(endPos, tempEditorValue.length)
-        // update selection
-        selectionStart = startPos -1
-        selectionEnd = endPos -1
-        saveTab()
-        setEditorValue(tempEditorValue)
-        focusEditor()
+        window.addEventListener('resize', (_) => {
+            app.media_queries()
+        })
+        // not sure how to make this work
+        // textarea.addEventListener('keydown', (e) => { 
+        //     if (e.key == "Tab") {
+        //         e.preventDefault()
+        //         const text = textarea.value
+        //         const altered = text.slice(0, textarea.selectionStart) + '    ' + text.slice(textarea.selectionEnd, text.length)
+        //         textarea.value = altered
+        //         textarea.selectionEnd -= 4
+        //         app.save()
+        //     }
+        // })
     }
-    const moveRight = () => {
-        selectionStart +=1
-        selectionEnd += 1
-        focusEditor()
-    }
-    const moveLeft = () => {
-        selectionStart -= 1
-        selectionEnd -= 1
-        focusEditor()
-    }
-
-    return `
-        <div data-app-container>
-            ${renderComponent(
-                Editor, 
-                {
-                    editorVisibility, 
-                    changeTab, 
-                    runWebsite, 
-                    activeTab, 
-                    editorValue,
-                    updateEditorValue,
-                    openMenu,
-
-                    addCharacter,
-                    deleteCharacter,
-                    moveRight, 
-                    moveLeft
-                }, 
-                name
-            )}
-            ${renderComponent(
-                Menu, 
-                {
-                    menuVisibility,
-                    newProject,
-                    getProjectFile,
-                    saveProject,
-                    exportProject,
-                    closeMenu
-                }, 
-                name
-            )}
-            ${renderComponent(
-                Emulator, 
-                {
-                    emulatorVisibility,
-                    closeEmulator
-                }, 
-                name
-            )}
-        </div>
-    `
 }
-
-setTitle('Sandbox')
-setStyle('./styles/app.css')
-setStyle('./styles/tabs.css')
-setStyle('./styles/editor.css')
-setStyle('./styles/keyboard.css')
-setIcon('./media/images/logo.png')
-renderRoot(App)
+app.init()

@@ -1,0 +1,67 @@
+#keyboard {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+.keyboard {
+    /* background-color: transparent; */
+    user-select: none;
+}
+.keyboard_keys {
+    text-align: center;
+}
+.keyboard_key {
+    height: 2.5rem;
+    width: 6%;
+    max-width: 90px;
+    margin: 0.2rem;
+    border-radius: 4px;
+    border: none;
+    background-color: var(--color-dark-light);
+    color: #fff;
+    font-size: 1.3rem;
+    outline: none;
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    vertical-align: top;
+    position: relative;
+}
+.keyboard_key--wide {
+    width: 12%;
+}
+.keyboard_key--extra-wide {
+    width: 36%;
+    max-width: 500px;
+}
+.keyboard_key--activatable::after {
+    content: '';
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: var(--color-dark);
+    border-radius: 50%;
+}
+.keyboard_key--active::after {
+    content: '';
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: var(--color-vibrant-1);
+    border-radius: 50%;
+}
+.keyboard_key--vibrant {
+    background-color: var(--color-vibrant-1);
+}
+.keyboard_key:active {
+    opacity: 0.7;
+    background-color: var(--color-vibrant-1);
+    -webkit-tap-highlight-color: var(--color-vibrant-1);
+}

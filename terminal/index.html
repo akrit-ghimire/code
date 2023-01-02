@@ -4,12 +4,62 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title id="title">Terminal</title>
+    <link id="icon" rel="icon" href="./data/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/tabs.css">
+    <link rel="stylesheet" href="./styles/code.css">
+    <link rel="stylesheet" href="./styles/menu-sub-page.css">
+    <link rel="stylesheet" href="./styles/control-bar.css">
+    <link rel="stylesheet" href="./styles/markdown.css">
+    <link rel="stylesheet" href="./styles/run-page.css">
+    <link rel="stylesheet" href="./styles/toast.css">
+    <script src="./file_manager.js" defer></script>
+    <script src="./md_parser.js" defer></script>
+    <script src="./index.js" defer></script>
+    <script src="./imports.js" defer></script>
 </head>
 <body>
-    <script src="./index.js" type="module" defer></script>
-    <div id="error">This website cannot be viewed on a mobile device. <br><br> <strong>Try using a laptop, desktop or tablet device instead.</strong></div>
-    <div id="root"></div>
+    <div id="error">This website cannot be viewed on a mobile device or on a small screen size. <br><br> <strong>Try using a laptop, desktop or tablet device instead.</strong></div>
+    <div id="run-page">
+        <button id="close_btn"><i class="material-icons">close</i></button>
+    </div>
+    <div id="ide">
+        <div id="code-page">
+            <button-bar>
+                <div id="left-tabs">
+                    <button id="save_btn">Save</button>
+                    <button id="load_btn">Load</button>
+                    <button id="new_btn">New</button>
+                </div>
+                <div id="right-tabs">
+                    <button style="background-color: var(--tertiary)"  id="run_btn">Run</button>
+                    <button id="tutorial_btn">Tutorials</button>
+                </div>
+            </button-bar>
+            <textarea></textarea>
+        </div>
+        <div id="help-page">
+            <div id="control-bar">
+                <div id="cb-hint">
+                    <p>Select a tutorial</p>
+                </div>
+                <div id="cb-controls">
+                    <button id="menu_btn"><i class="material-icons">menu</i></button>
+                    <button id="backward_btn" disabled><i class="material-icons">arrow_back</i></button>
+                    <p id="page_indicator">1 of 10</p>
+                    <button id="forward_btn"><i class="material-icons">arrow_forward</i></button>
+                </div>
+            </div>
+            <div id="menu-sub-page">
+                <lesson-list>
+                    
+                </lesson-list>
+            </div>
+            <md id="article-sub-page">
+            </md>
+        </div>
+    </div>
 </body>
 </html>

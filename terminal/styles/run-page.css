@@ -1,0 +1,29 @@
+#run-page {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+#run-page button {
+    font-size: 1rem;
+    color: var(--secondary);
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--light);
+    margin-right: 4px;
+    opacity: 0.3;
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+}
+#run-page button i {
+    margin: 1rem;
+}
+#run-page button { cursor: pointer; transition: 0.1s; }
+#run-page button:hover {opacity: 1;}
+#run-page button:active {opacity: 0.8;}
+
+#run-page iframe {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}

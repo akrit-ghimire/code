@@ -1,0 +1,71 @@
+/* markdown styles */
+md h1, md h2, md h3 {
+    color: var(--secondary);
+    margin: 0;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+md {
+    color: white;
+    line-height: 1.8rem;
+    text-align: justify;
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 2rem 2.5rem;
+    height: 100vh;
+    overflow: auto;
+}
+
+md code {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--primary);
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    display: block;
+    text-align: left;
+    border: thin solid var(--primary);
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+.highlight {
+    background-color: rgb(234, 31, 99, .2);
+}
+
+md img {
+    display: block;
+    width: 100%;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+}
+
+md a {
+    text-decoration: none;
+    color: var(--primary);
+    cursor: pointer;
+}
+md a:hover {
+    color: var(--tertiary);
+}
+
+md .next {
+    width: auto;
+    padding: 0.75rem 2rem;
+    margin: 4rem auto;
+    border: 0;
+    background-color: transparent;
+    color: var(--secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    font-weight: bold;
+}
+md .next i {
+    margin-left: 0.25rem;
+}
+md .next:hover {
+    color: var(--tertiary);
+}

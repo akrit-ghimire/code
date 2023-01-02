@@ -1,0 +1,52 @@
+#tabs {
+    display: flex;
+    justify-content: space-between;
+}
+#left-tabs, #right-tabs {
+    display: flex;
+}
+#right-tabs .tab {
+    margin-left: 4px;
+}
+#left-tabs .tab {
+    margin-right: 4px;
+}
+.tab {
+    display: grid;
+    height: 100%;
+    width: fit-content;
+    color: var(--color-vibrant-2);
+    border-radius: 4px;
+    cursor:default;
+}
+.tab span {
+    align-self: center;
+    justify-self: center;
+    font-size: 1.05rem;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    vertical-align: top;
+    position: relative;
+}
+.hover { cursor: pointer; transition: 0.1s; }
+.hover:hover {opacity: 0.8;}
+
+.blinking {
+    animation: blink 1.5s infinite;
+    opacity: 1
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
