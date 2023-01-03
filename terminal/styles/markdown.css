@@ -28,6 +28,9 @@ md code {
     margin: 1rem 0;
     overflow-x: auto;
 }
+md code pre {
+    padding-right: 4rem;
+}
 .highlight {
     background-color: rgb(234, 31, 99, .2);
 }
@@ -68,4 +71,47 @@ md .next i {
 }
 md .next:hover {
     color: var(--tertiary);
+}
+
+/* Multiple Choice Quiz Styles */
+
+md .quiz {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+md .quiz h1 {
+    color: var(--secondary);
+    margin-bottom: 16px;
+}
+.quiz p { /* each multiple choice item */
+    background-color: var(--light);
+    color: white;
+    border-radius: 8px;
+    padding: 0.5rem 1.25rem;
+    padding-right: 4rem;
+    display: flex;
+    align-items: center;
+    font-family: sans-serif;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 8px;
+    user-select: none;
+    position: relative;
+    text-align: left;
+}
+.quiz p i { /* hidden correct / wrong icon */
+    position: absolute;
+    right: 1.25rem;
+    color: transparent;
+}
+.quiz p:hover {opacity: 0.8;}
+.quiz:has(input[type="radio"]:checked) p:hover {opacity: 1; cursor: default;}
+.quiz:has(input[type="radio"]:checked) p {color: var(--primary);} /* wrong validate */
+.quiz:has(input[type="radio"]:checked) p i {color: var(--primary);}
+.quiz:has(input[type="radio"]:checked) p.correct {color: var(--secondary);} /* correct validate */
+.quiz:has(input[type="radio"]:checked) p.correct i {color: var(--secondary);}
+.quiz input[type="radio"] { /* hide default radio */
+    appearance: none;
+    display: none;
 }

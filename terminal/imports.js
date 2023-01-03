@@ -1,27 +1,27 @@
 // IMPORT PAGES
 app.loader.import(
-    'Lesson 1: The Basics', 
-    '1.what.is.html.md'
+    'An intro to making websites with HTML', 
+    'get.started.making.websites.with.html.md'
 )
 app.loader.import(
-    'Poem Activity', // title
-    '2.poem.activity.md' // src
+    'Diving deeper and learning what HTML is', 
+    'what.is.html.and.how.can.i.use.it.md'
 )
 app.loader.import(
-    'Lesson 2: Tags',  
-    '3.what.are.tags.md'
+    'How to add text to your website', 
+    'how.to.add.text.md'
 )
 app.loader.import(
-    'Movie Activity', 
-    '4.movie.activity.md'
+    'How to add bullet point lists and numbered lists', 
+    'how.to.add.lists.md'
 )
 app.loader.import(
-    'Project 1: Cat Toy Shop', 
-    '5.project.cat.toy.shop.md'
+    'How to add pictures to your website', 
+    'how.to.add.images.md'
 )
 app.loader.import(
-    'Lesson 3: What Is CSS', 
-    '6.what.is.css.md'
+    'Project: Make a movie (website)', 
+    'project.avatar.movie.website.md'
 )
 // LOAD THE MENU
 app.loader.load_menu()

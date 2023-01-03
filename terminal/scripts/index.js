@@ -33,6 +33,12 @@ const app = {
         iframe: null,
         code: '',
     },
+    alter_meta: () => {
+        let extracted_title_elem = app.data.iframe.contentDocument.querySelector('title')
+        if (extracted_title_elem) title.innerText = extracted_title_elem.innerText
+        let extracted_icon_elem = app.data.iframe.contentDocument.querySelector('link[rel=icon]')
+        if (extracted_icon_elem) icon.href = extracted_icon_elem.href
+    },
     open: {
         run_page: () => {
             ide.style.display = 'none'
@@ -41,19 +47,8 @@ const app = {
             app.data.iframe = document.createElement('iframe')
             app.data.code = textarea.value
             app.data.iframe.srcdoc = app.data.code
+            app.data.iframe.onload = app.alter_meta
             run_page.append(app.data.iframe)
-            title.innerText = 'Terminal'
-            icon.href = './data/logo.png'
-
-            let extracted_title = app.data.code.match(/^<title>(.*)<\/title>/gim) || [] // change title
-            if (extracted_title.length > 0) {
-                title.innerText = extracted_title[0].replace(/^<title>(.*)<\/title>/gim, '$1')
-            } 
-            let extracted_icon = app.data.code.match(/^<link rel="icon" href="(.*)" type="image\/x-icon">/gim) || [] // change icon
-            if (extracted_icon.length > 0) {
-                icon.href = extracted_icon[0].replace(/^<link rel="icon" href="(.*)" type="image\/x-icon">/gim, '$1')
-            }
-
         },
         ide: () => {
             ide.style.display = 'flex'
@@ -129,18 +124,20 @@ const app = {
         slide_elems: [],
         slide: 0,
         slide_length: 0,
+        tutorial_name: null,
         import: (title, src) => {
             app.loader.pages.push({title, src})
         },
         create_link: ({title, src}) => `
-            <lesson onclick="app.loader.load_page('${src}')">
+            <lesson onclick="app.loader.load_page( '${title}', '${src}')">
                 <p>${title}</p>
                 <span><i class="material-icons">start</i></span>
             </lesson>
         `,
-        load_page: (src) => {
+        load_page: (title, src) => {
             app.open.article()
             md.read(src)
+            app.loader.tutorial_name = title
             app.loader.slide = 0
             app.loader.slide_elems = Array.from(document.querySelectorAll('[data-page]'))
             app.loader.slide_length = app.loader.slide_elems.length
@@ -183,6 +180,10 @@ const app = {
 
             app.loader.page_transition_post()
         }
+    },
+    tutorial_complete: () => {
+        app.open.menu()
+        app.notify('Congrats! You completed ' + app.loader.tutorial_name)
     },
     notify: (message) => {
         const existingToasts = Array.from(document.querySelectorAll('toast'))
