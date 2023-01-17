@@ -23,5 +23,13 @@ app.loader.import(
     'Project: Make a movie (website)', 
     'project.avatar.movie.website.md'
 )
+app.loader.import(
+    'What is CSS', 
+    'what.is.css.md'
+)
+app.loader.import(
+    'How to add background colour and text colour', 
+    'adding.color.css.md'
+)
 // LOAD THE MENU
 app.loader.load_menu()

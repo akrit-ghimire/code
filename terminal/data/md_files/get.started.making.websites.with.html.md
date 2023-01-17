@@ -39,7 +39,7 @@ Code is just a bunch of symbols, letters and numbers arranged in a certain way. 
 
 To understand this (take National 5 Computing or) try this quick experiment. In this scenario, you will be the computer and I will be the coder (someone who writes code). Below, I have typed out a bunch of letters and a symbol. Can you understand what I have just told you?
 
-!./md_media/1_quick_experiment_1.jpg
+!./md_media/jumbled_words.jpg
 
 @@page-end
 
@@ -49,7 +49,7 @@ To understand this (take National 5 Computing or) try this quick experiment. In 
 
 If I rearange what I have typed, can you understand me now?
 
-!./md_media/1_quick_experiment_2.gif
+!./md_media/rejumbled_words.gif
 
 Did you say hello? No? Anyway, what you have tried out is a very large oversimplification of what actually goes on. When you write code, the computer translates your strange English into a language it understands called Binary. Once translated, it reads your code again, this time it knows what you're saying and will carry out whatever instruction you have told it to do.
 

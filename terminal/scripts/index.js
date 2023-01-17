@@ -128,9 +128,9 @@ const app = {
         import: (title, src) => {
             app.loader.pages.push({title, src})
         },
-        create_link: ({title, src}) => `
+        create_link: ({title, src}, index) => `
             <lesson onclick="app.loader.load_page( '${title}', '${src}')">
-                <p>${title}</p>
+                <p>${index}. ${title}</p>
                 <span><i class="material-icons">start</i></span>
             </lesson>
         `,
@@ -144,8 +144,8 @@ const app = {
             app.loader.page_back() // ensures starts at 0
         },
         load_menu: () => {
-            app.loader.pages.forEach(page => {
-                lesson_list.insertAdjacentHTML('beforeend', app.loader.create_link(page))
+            app.loader.pages.forEach((page, index) => {
+                lesson_list.insertAdjacentHTML('beforeend', app.loader.create_link(page, index+1))
             })
         },
         page_transition_pre: () => {

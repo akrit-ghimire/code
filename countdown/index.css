@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Barlow', sans-serif;;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+countdown-page {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+countdown-page footer, header {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    padding: 1rem;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+}
+countdown-page header { top: 0; }
+countdown-page footer { bottom: 0; }
+countdown-page footer button {
+    margin: 0 0.5rem;
+    outline: 0;
+    border: 0;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: .3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+countdown-page footer button i {
+    font-size: 1rem !important;
+    margin-left: 3px;
+}
+countdown-page footer button:hover {
+    color: purple;
+}
+countdown-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 4rem;
+}
+
+countdown-container p {
+    font-size: clamp(1.6rem, 4.5vw, 2rem); 
+}
+countdown-container h1 {
+    font-size: clamp(4rem, 12vw, 9rem);
+    margin: 0rem 0;
+}
+
+create-page {
+    display: none;
+}
