@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="index.css">
+    <script src="./index.js" defer></script>
+    <title>Dodgeball</title>
+</head>
+<body>
+    <audio src="" id="sfx"></audio>
+    <audio src="" id="theme" loop></audio>
+    <p>Pick a theme:</p>
+    <theme-tune-group>
+    </theme-tune-group>
+    <p>Soundboard:</p>
+    <soundboard-group>
+    </soundboard-group>
+    <p>Countdown Timer:</p>
+    <timer>
+        <button id="play" class="material-icons">play_arrow</button>
+        <span id="time">05:00</span>
+        <button id="pause" class="material-icons">pause</button>
+    </timer>
+    <timer-group>
+    </timer-group>
+    <game-selector-group>
+        <div>
+            <button id="left" class="material-icons" onclick="app.gamemode.back()">arrow_back</button>
+            <span id="game-mode"></span>
+            <button id="right" class="material-icons" onclick="app.gamemode.next()">arrow_forward</button>
+        </div>
+        <button onclick="app.gamemode.select()">Select Gamemode</button>
+    </game-selector-group>
+</body>
+</html>

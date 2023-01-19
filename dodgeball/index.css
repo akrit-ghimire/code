@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+:root {
+    --primary:  #ff9f1c;
+    --secondary: white;
+    --active: #2ec4b6;
+    --divider:  #ffbf69;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+}
+p {
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    background-color: var(--divider);
+    color: black;
+    font-weight: bold
+}
+theme-tune-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0.5rem;
+    padding: 1rem;
+    width: 100%;
+}
+button {
+    padding: 1rem;
+    background-color: var(--primary);
+    cursor: pointer;
+    border: 2px solid black;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    opacity: 1;
+    color: white;
+}
+button.active {
+    background-color: var(--active);
+    color: white;
+}
+button:active {
+    background-color: var(--active);
+    opacity: 0.8;
+}
+
+soundboard-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.5rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+timer-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.5rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+timer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    background-color: var(--primary);
+    color: white;
+    font-size: 2.2rem;
+    padding: 1rem;
+    font-weight: bold;
+}
+
+game-selector-group {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--divider);
+    padding: 1rem;
+}
+div {
+    margin-bottom: 1rem;
+    width: 100%;
+    display: inherit;
+    align-items: center;
+}
+div span {
+    width: 100%;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+
+}
