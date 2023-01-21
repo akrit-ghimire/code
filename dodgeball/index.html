@@ -11,7 +11,7 @@
 </head>
 <body>
     <audio src="" id="sfx"></audio>
-    <audio src="" id="theme" loop></audio>
+    <audio src="" id="theme"></audio>
     <p>Pick a theme:</p>
     <theme-tune-group>
     </theme-tune-group>
@@ -29,7 +29,10 @@
     <game-selector-group>
         <div>
             <button id="left" class="material-icons" onclick="app.gamemode.back()">arrow_back</button>
-            <span id="game-mode"></span>
+            <span>
+                <h4 id="game-mode"></h4>
+                <h4 id="game-mode-desc">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error, beatae.</h4>
+            </span>
             <button id="right" class="material-icons" onclick="app.gamemode.next()">arrow_forward</button>
         </div>
         <button onclick="app.gamemode.select()">Select Gamemode</button>

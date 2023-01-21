@@ -20,36 +20,56 @@ const timer_buttons = [
     {title: '30 sec', length: 30},
 ]
 const game_modes = [
-    {title: 'Hot Potato', src: './sounds/gamemode/hotPotato.mp3'},
-    {title: 'Classic', src: './sounds/gamemode/classic.mp3'},
-    {title: 'Stuck in the Mud', src: './sounds/gamemode/stuckInTheMud.mp3'},
+    {
+        title: 'Classic', 
+        src: './sounds/gamemode/classic.mp3',
+        desc: 'If hit by a ball you must stand on the opposite bench. If you catch a ball on the bench, you are back in. If an entire team is on the bench, the other team wins.',
+    },
+    {
+        title: 'Hot Potato', 
+        src: './sounds/gamemode/hotPotato.mp3',
+        desc: 'Like Classic, however players cannot hold onto the ball, they must throw it as soon as they hold it.',
+    },
+    {
+        title: 'Half and Half', 
+        src: './sounds/gamemode/halfAndHalf.mp3',
+        desc: 'Like Classic, but half the team are on the bench to begin with.',
+    },
+    {
+        title: 'Stuck in the Mud', 
+        src: './sounds/gamemode/stuckInTheMud.mp3',
+        desc: 'Like Classic, but if hit, you must stand with both arms up in a Y and feet wide apart. You are back in when a ball rolls under your legs.',
+    },
+    {
+        title: 'Speedy Frenzy', 
+        src: './sounds/gamemode/speedyFrenzy.mp3',
+        desc: 'Like Classic, but only 30 seconds to play. Team with the fewest out, wins',
+    },
 ]
 
 const app = {
     theme: {
         group: document.querySelector('theme-tune-group'),
-        current_theme: null,
         create_buttons: () => {
-            theme_buttons.forEach(button => {
+            theme_buttons.forEach((button, index) => {
                 const button_elem = document.createElement('button')
                 button_elem.innerText = button.title
 
                 button_elem.addEventListener('click', () => {
-                    app.theme.current_theme = button.title
-                    app.theme.change_theme()
-                    app.playtheme(button.src)
+                    app.theme.change_theme(index)
                 })
 
                 app.theme.group.append(button_elem)
             })
         },
-        change_theme: () => {
+        change_theme: (index) => {
             Array.from(app.theme.group.children).forEach(button => {
                 button.classList.remove('active')
-                if (button.innerText == app.theme.current_theme) {
+                if (button.innerText == theme_buttons[index].title) {
                     button.classList.add('active')
                 }
             })
+            app.playtheme(theme_buttons[index].src)
         }
     },
     soundboard: {
@@ -130,22 +150,24 @@ const app = {
     gamemode: {
         index: 0,
         element: document.getElementById('game-mode'),
+        element_desc: document.getElementById('game-mode-desc'),
         next: () => {
             app.gamemode.index += 1
             if (app.gamemode.index > game_modes.length - 1) {
-                app.gamemode.index = game_modes.length -1
+                app.gamemode.index = 0
             }
             app.gamemode.update()
         },
         back: () => {
             app.gamemode.index -= 1
             if (app.gamemode.index < 0) {
-                app.gamemode.index = 0
+                app.gamemode.index = game_modes.length -1
             }
             app.gamemode.update()
         },
         update: () => {
             app.gamemode.element.innerText = game_modes[app.gamemode.index].title
+            app.gamemode.element_desc.innerText = game_modes[app.gamemode.index].desc
         },
         select: () => {
             const gamemode = game_modes[app.gamemode.index]
@@ -174,6 +196,11 @@ const app = {
         document.getElementById('pause').addEventListener('click', app.timer.pause)
         app.sfx_audio_elem.addEventListener('ended', () => {
             app.theme_audio_elem.play()
+        })
+        app.theme_audio_elem.addEventListener('ended', () => {
+            let random_theme = Math.floor(Math.random() * theme_buttons.length)
+            console.log(random_theme)
+            app.theme.change_theme(random_theme)
         })
     }
 }
