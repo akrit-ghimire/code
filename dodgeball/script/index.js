@@ -1,10 +1,17 @@
 const theme_buttons = [
     {title: 'Fall Guys', src: './sounds/themes/fallguys1.mp3'},
-    {title: 'Fall Guys 2', src: './sounds/themes/fallguys2.mp3'},
     {title: 'Raining Tacos', src: './sounds/themes/tacos.mp3'},
     {title: 'Minecraft', src: './sounds/themes/minecraft.mp3'},
     {title: 'Wednesday', src: './sounds/themes/wednesday.mp3'},
     {title: 'Kahoot', src: './sounds/themes/kahoot.mp3'},
+
+    {title: 'Peppa Pig', src: './sounds/themes/peppaPig.mp3'},
+    {title: 'Mr Bean', src: './sounds/themes/mrBean.mp3'},
+    {title: 'Gummy Bears', src: './sounds/themes/gummyBear.mp3'},
+    {title: 'Bad Guy', src: './sounds/themes/badGuy.mp3'},
+    {title: 'Rockabye', src: './sounds/themes/rockabye.mp3'},
+
+    {title: 'Subway Surfers', src: './sounds/themes/subwaySurfers.mp3'},
 ]
 const soundboard_buttons = [
     {title: 'Air Horn', src: './sounds/sfx/airHorn.mp3'},
