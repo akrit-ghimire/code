@@ -31,5 +31,13 @@ app.loader.import(
     'How to add background colour and text colour', 
     'adding.color.css.md'
 )
+app.loader.import(
+    'How to add padding and margin', 
+    'what.is.padding.and.margin.md'
+)
+app.loader.import(
+    'How to add a border radius', 
+    'what.is.border.radius.md'
+)
 // LOAD THE MENU
 app.loader.load_menu()
