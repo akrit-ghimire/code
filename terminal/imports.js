@@ -20,6 +20,10 @@ app.loader.import(
     'how.to.add.images.md'
 )
 app.loader.import(
+    'How to an icon to the tab bar', 
+    'how.to.add.icon.md'
+)
+app.loader.import(
     'Project: Make a movie (website)', 
     'project.avatar.movie.website.md'
 )
@@ -38,6 +42,10 @@ app.loader.import(
 app.loader.import(
     'How to add a border radius', 
     'what.is.border.radius.md'
+)
+app.loader.import(
+    'Project: Copying the BBC', 
+    'bbc.card.clone.project.md'
 )
 // LOAD THE MENU
 app.loader.load_menu()
