@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockly Assistant - Website Club</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Khula:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/workspace.css">
+    <link rel="stylesheet" href="./styles/select_mode.css">
+    <link rel="stylesheet" href="./styles/chat_mode.css">
+    <link rel="stylesheet" href="./styles/voice_mode.css">
+    <link rel="stylesheet" href="./styles/toolbox.css">
+    <link rel="stylesheet" href="./styles/welcome.css">
+
+    <script src="https://unpkg.com/blockly/blockly.min.js" defer></script>
+    <script src="./libraries/blockly/blockly_theme.js" defer></script>
+    <script src="./libraries/blockly/toolbox.js" defer></script>
+    <script src="./libraries/blockly/custome_va_blocks.js" defer></script>
+    <script src="./blockly_init.js" defer></script>
+
+
+    <script src="./libraries/file_management.js" defer></script>
+    <script src="./libraries/user_notification.js" defer></script>
+    <script src="./libraries/speech.js" defer></script>
+    <script src="./app.js" defer></script>
+</head>
+
+<body>
+    <div class="root">
+        <div id="welcome">
+            <h2>Welcome To</h2>
+            <h1>Blockly Assistant</h1>
+            <p class="welcome_text">This website will help you create your very own virtual assistant / chatbot!</p>
+            <button id="welcome_btn">
+                <span><i class="material-icons">forum</i></span>
+                <p>Go to Workspace</p>
+            </button>
+        </div>
+        <button id="close_btn"><i class="material-icons">close</i></button>
+        <div id="workspace_page">
+            <div class="top-menu-group">
+                <div class="top-menu">
+                    <button id="save_btn">save</button>
+                    <button id="load_btn">load</button>
+                    <button id="new_btn">new</button>
+                    <button id="run_btn">run</button>
+                </div>
+            </div>
+            <div id="workspace">
+                <div id="blocklyWorkspace"></div>
+                <xml id="toolbox-categories" style="display: none">
+                    <category css-icon="psychology" name="Logic" categorystyle="logic_category">
+                        <block type="controls_if"></block>
+                        <block type="logic_compare"></block>
+                        <block type="logic_operation"></block>
+                        <block type="logic_negate"></block>
+                        <block type="logic_boolean"></block>
+                        <block type="logic_null" disabled="true"></block>
+                        <block type="logic_ternary"></block>
+                    </category>
+                    <category css-icon="all_inclusive" name="Loops" categorystyle="loop_category">
+                        <block type="controls_repeat_ext">
+                            <value name="TIMES">
+                                <shadow type="math_number">
+                                    <field name="NUM">10</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="controls_repeat" disabled="true"></block>
+                        <block type="controls_whileUntil"></block>
+                        <block type="controls_for">
+                            <value name="FROM">
+                                <shadow type="math_number">
+                                    <field name="NUM">1</field>
+                                </shadow>
+                            </value>
+                            <value name="TO">
+                                <shadow type="math_number">
+                                    <field name="NUM">10</field>
+                                </shadow>
+                            </value>
+                            <value name="BY">
+                                <shadow type="math_number">
+                                    <field name="NUM">1</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="controls_forEach"></block>
+                        <block type="controls_flow_statements"></block>
+                    </category>
+                    <category css-icon="calculate" name="Math" categorystyle="math_category">
+                        <block type="math_number" gap="32">
+                            <field name="NUM">123</field>
+                        </block>
+                        <block type="math_arithmetic">
+                            <value name="A">
+                                <shadow type="math_number">
+                                    <field name="NUM">1</field>
+                                </shadow>
+                            </value>
+                            <value name="B">
+                                <shadow type="math_number">
+                                    <field name="NUM">1</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="math_single">
+                            <value name="NUM">
+                                <shadow type="math_number">
+                                    <field name="NUM">9</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="math_trig">
+                            <value name="NUM">
+                                <shadow type="math_number">
+                                    <field name="NUM">45</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="math_constant"></block>
+                        <block type="math_number_property">
+                            <value name="NUMBER_TO_CHECK">
+                                <shadow type="math_number">
+                                    <field name="NUM">0</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="math_round">
+                            <value name="NUM">
+                                <shadow type="math_number">
+                                    <field name="NUM">3.1</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="math_on_list"></block>
+                        <block type="math_modulo">
+                            <value name="DIVIDEND">
+                                <shadow type="math_number">
+                                    <field name="NUM">64</field>
+                                </shadow>
+                            </value>
+                            <value name="DIVISOR">
+                                <shadow type="math_number">
+                                    <field name="NUM">10</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="math_constrain">
+                            <value name="VALUE">
+                                <shadow type="math_number">
+                                    <field name="NUM">50</field>
+                                </shadow>
+                            </value>
+                            <value name="LOW">
+                                <shadow type="math_number">
+                                    <field name="NUM">1</field>
+                                </shadow>
+                            </value>
+                            <value name="HIGH">
+                                <shadow type="math_number">
+                                    <field name="NUM">100</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="math_random_int">
+                            <value name="FROM">
+                                <shadow type="math_number">
+                                    <field name="NUM">1</field>
+                                </shadow>
+                            </value>
+                            <value name="TO">
+                                <shadow type="math_number">
+                                    <field name="NUM">100</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="math_random_float"></block>
+                        <block type="math_atan2">
+                            <value name="X">
+                                <shadow type="math_number">
+                                    <field name="NUM">1</field>
+                                </shadow>
+                            </value>
+                            <value name="Y">
+                                <shadow type="math_number">
+                                    <field name="NUM">1</field>
+                                </shadow>
+                            </value>
+                        </block>
+                    </category>
+                    <category css-icon="keyboard" name="Text" categorystyle="text_category">
+                        <block type="text"></block>
+                        <block type="text_multiline"></block>
+                        <block type="text_join"></block>
+                        <block type="text_append">
+                            <value name="TEXT">
+                                <shadow type="text"></shadow>
+                            </value>
+                        </block>
+                        <block type="text_length">
+                            <value name="VALUE">
+                                <shadow type="text">
+                                    <field name="TEXT">abc</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="text_isEmpty">
+                            <value name="VALUE">
+                                <shadow type="text">
+                                    <field name="TEXT"></field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="text_indexOf">
+                            <value name="VALUE">
+                                <block type="variables_get">
+                                    <field name="VAR">text</field>
+                                </block>
+                            </value>
+                            <value name="FIND">
+                                <shadow type="text">
+                                    <field name="TEXT">abc</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="text_charAt">
+                            <value name="VALUE">
+                                <block type="variables_get">
+                                    <field name="VAR">text</field>
+                                </block>
+                            </value>
+                        </block>
+                        <block type="text_getSubstring">
+                            <value name="STRING">
+                                <block type="variables_get">
+                                    <field name="VAR">text</field>
+                                </block>
+                            </value>
+                        </block>
+                        <block type="text_changeCase">
+                            <value name="TEXT">
+                                <shadow type="text">
+                                    <field name="TEXT">abc</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="text_trim">
+                            <value name="TEXT">
+                                <shadow type="text">
+                                    <field name="TEXT">abc</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="text_count">
+                            <value name="SUB">
+                                <shadow type="text"></shadow>
+                            </value>
+                            <value name="TEXT">
+                                <shadow type="text"></shadow>
+                            </value>
+                        </block>
+                        <block type="text_replace">
+                            <value name="FROM">
+                                <shadow type="text"></shadow>
+                            </value>
+                            <value name="TO">
+                                <shadow type="text"></shadow>
+                            </value>
+                            <value name="TEXT">
+                                <shadow type="text"></shadow>
+                            </value>
+                        </block>
+                        <block type="text_reverse">
+                            <value name="TEXT">
+                                <shadow type="text"></shadow>
+                            </value>
+                        </block>
+                        <label text="Input/Output:" web-class="ioLabel"></label>
+                        <block type="text_print">
+                            <value name="TEXT">
+                                <shadow type="text">
+                                    <field name="TEXT">abc</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="text_prompt_ext">
+                            <value name="TEXT">
+                                <shadow type="text">
+                                    <field name="TEXT">abc</field>
+                                </shadow>
+                            </value>
+                        </block>
+                    </category>
+                    <category css-icon="list" name="Lists" categorystyle="list_category">
+                        <block type="lists_create_with">
+                            <mutation items="0"></mutation>
+                        </block>
+                        <block type="lists_create_with"></block>
+                        <block type="lists_repeat">
+                            <value name="NUM">
+                                <shadow type="math_number">
+                                    <field name="NUM">5</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="lists_length"></block>
+                        <block type="lists_isEmpty"></block>
+                        <block type="lists_indexOf">
+                            <value name="VALUE">
+                                <block type="variables_get">
+                                    <field name="VAR">list</field>
+                                </block>
+                            </value>
+                        </block>
+                        <block type="lists_getIndex">
+                            <value name="VALUE">
+                                <block type="variables_get">
+                                    <field name="VAR">list</field>
+                                </block>
+                            </value>
+                        </block>
+                        <block type="lists_setIndex">
+                            <value name="LIST">
+                                <block type="variables_get">
+                                    <field name="VAR">list</field>
+                                </block>
+                            </value>
+                        </block>
+                        <block type="lists_getSublist">
+                            <value name="LIST">
+                                <block type="variables_get">
+                                    <field name="VAR">list</field>
+                                </block>
+                            </value>
+                        </block>
+                        <block type="lists_split">
+                            <value name="DELIM">
+                                <shadow type="text">
+                                    <field name="TEXT">,</field>
+                                </shadow>
+                            </value>
+                        </block>
+                        <block type="lists_sort"></block>
+                        <block type="lists_reverse"></block>
+                    </category>
+                    <category css-icon="tag" name="Variables" categorystyle="variable_category" custom="VARIABLE">
+                    </category>
+                    <category css-icon="functions" name="Functions" categorystyle="procedure_category"
+                        custom="PROCEDURE"></category>
+                    <category id="predefined" css-icon="record_voice_over" name="Predefined" colour="300">
+                    </category>
+                </xml>
+            </div>
+        </div>
+        <div id="select_mode">
+            <button id="chat_mode_btn">
+                <span><i class="material-icons">forum</i></span>
+                <p>Chat Mode</p>
+            </button>
+            <button id="voice_mode_btn">
+                <span><i class="material-icons">record_voice_over</i></span>
+                <p>Voice Mode</p>
+            </button>
+        </div>
+        <div id="voice_mode">
+            <div class="ui">
+                <div class="indicator" id="indicator"><i class="material-icons" id="indicator_icon">mic</i></div>
+                <div class="listened_text" id="indicator_listened_text">Lorem ipsum dolor, sit amet consectetur
+                    adipisicing elit. Fugit aliquam quos error dolore illum suscipit voluptas nostrum laudantium
+                    aliquid. Aut!</div>
+            </div>
+        </div>
+        <div id="chat_mode">
+            <div class="messages_group" id="messages_group">
+                <div class="va_message">
+                    <p>send - date</p>
+                    <p>Hello there fellow user</p>
+                </div>
+                <div class="user_message">
+                    <p>send - date</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique libero tenetur nihil cumque
+                        facilis sed dolorem nam sequi, provident rerum, error voluptate qui facere? Consequuntur quod
+                        aliquam magni sapiente beatae, adipisci dignissimos tempora error recusandae nostrum, magnam non
+                        maiores animi.</p>
+                </div>
+                <div class="va_message typing">
+                    <span class="circle bouncing"></span>
+                    <span class="circle bouncing"></span>
+                    <span class="circle bouncing"></span>
+                </div>
+                <div class="va_message">
+                    <p>send - date</p>
+                    <p>Hello there fellow user</p>
+                </div>
+            </div>
+            <div class="input_group">
+                <input disabled type="text" id="input">
+                <button disabled id="submit_btn"><i class="material-icons">send</i></button>
+            </div>
+
+        </div>
+    </div>
+    <iframe frameborder="0" id="code-iframe" sandbox="allow-scripts allow-same-origin"></iframe>
+</body>
+
+</html>

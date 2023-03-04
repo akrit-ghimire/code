@@ -1,0 +1,49 @@
+/* Makes our label white. */
+.blocklyTreeLabel {
+    color: white;
+}
+
+/* Adds padding around the group of categories and separators. */
+.blocklyToolboxContents {
+    padding: .5em;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    overflow: hidden;
+    /* height: 5em; */
+}
+.blocklyToolboxCategory {
+    margin: 0;
+    max-width: 7rem;
+    width: 100%;
+}
+
+/* Adds space between the categories, rounds the corners and adds space around the label. */
+.blocklyTreeRow {
+    padding: 2rem 1rem !important;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer !important;
+}
+
+
+.blocklyTreeRowContentContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.blocklyTreeRowContentContainer i {
+    font-size: 1.8rem;
+    color: white;
+}
+
+.selected {
+    background: transparent !important;
+    color: var(--primary) !important;
+}
+.selected span, .selected i {
+    color: var(--primary) !important;
+}

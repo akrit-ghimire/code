@@ -1,0 +1,91 @@
+/* <div id="voice_mode">
+            <div class="ui">
+                <div class="indicator"><i class="material-icons">close</i></div>
+                <div class="listened_text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit aliquam quos error dolore illum suscipit voluptas nostrum laudantium aliquid. Aut!</div>
+            </div>
+        </div> */
+
+#voice_mode {
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.ui {
+    width: 100%;
+    max-width: 600px;
+    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ui .indicator {
+    width: 10rem;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: var(--primary);
+    transition: .3s;
+}
+
+.indicator i {
+    font-size: 3rem;
+    color: white;
+}
+
+.indicator_speaking {
+    width: 8rem !important;
+    height: 8rem !important;
+    background-color: var(--tertiary) !important;
+    animation: purple-pulse-animation 2s infinite;
+}
+
+.inactive {
+    background-color: var(--light) !important;
+}
+
+.pink_pulse {
+    animation: pink-pulse-animation 2s infinite;
+}
+
+@keyframes pink-pulse-animation {
+    0% {
+        box-shadow: 0 0 0 0px var(--primary);
+    }
+
+    70% {
+        box-shadow: 0 0 0 1rem rgba(234, 31, 99, .6);
+    }
+
+    100% {
+        box-shadow: 0 0 0 1rem rgba(234, 31, 99, 0);
+    }
+}
+
+@keyframes purple-pulse-animation {
+    0% {
+        box-shadow: 0 0 0 0px var(--tertiary);
+    }
+
+    70% {
+        box-shadow: 0 0 0 .8rem rgba(102, 41, 163, .6);
+    }
+
+    100% {
+        box-shadow: 0 0 0 .8rem rgba(234, 31, 99, 0);
+    }
+}
+
+.ui .listened_text {
+    text-align: center;
+    color: white;
+    font-size: 1.3rem;
+    opacity: .6;
+}
