@@ -5,7 +5,7 @@ const file_management = {
         return await new Promise((resolve, reject) => {
             const input = document.createElement('input')
             input.type = 'file'
-            input.accept = `application/${file_type},.${file_type}`
+            // input.accept = `application/${file_type},.${file_type}` // errors on chrome android and ios devices
 
             input.addEventListener('change', async () => {
                 if (input.files.length > 0) {
