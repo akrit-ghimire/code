@@ -14,8 +14,6 @@
 }
 body {
     overflow: hidden;
-    width: 100vw;
-    height: 100vh;
 }
 
 .root {
@@ -23,6 +21,10 @@ body {
     width: 100%;
     height: 100%;
     position: relative;
+}
+
+#code_iframe {
+    display: none;
 }
 
 

@@ -198,6 +198,11 @@ app = {
         },
     },
     init: () => {
+        document.body.style.height = `${window.innerHeight}px` // fix height issues for mobile devices
+        document.body.addEventListener('resize', () => {
+            document.body.style.height = `${window.innerHeight}px` // fix height issues for mobile devices
+        })
+
         speech.init(app.voice_mode.indicator_text) // for indicator text
 
         app.switch_page(pages.welcome)
