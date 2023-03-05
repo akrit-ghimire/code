@@ -17,7 +17,7 @@ const pages = {
     chat_mode: document.getElementById('chat_mode')
 }
 const text_input = document.getElementById('input')
-const code_iframe = document.getElementById('code-iframe')
+const code_iframe = document.getElementById('code_iframe')
 
 app = {
     mode: null,
@@ -173,7 +173,10 @@ app = {
     run_code: () => {
         user_notification.toast(`Your app is now running in ${app.mode} mode.`)
         const code = Blockly.JavaScript.workspaceToCode(workspace)
-        code_iframe.srcdoc = `<html><head></head><body><script>const app = window.top.app;${code}</script></body></html>`
+        const iframe = document.createElement('iframe')
+        iframe.sandbox = "allow-scripts allow-same-origin"
+        iframe.srcdoc = `<html><head></head><body><script>const app = window.top.app;${code};main()</script></body></html>`
+        code_iframe.append(iframe)
     },
     file_system: {
         save_code: () => {
@@ -215,7 +218,11 @@ app = {
             onresize() // init workspace
         })
         btns.close.addEventListener('click', () => {
-            code_iframe.srcdoc = ''
+            const iframe = code_iframe.querySelector('iframe')
+            if (iframe) {
+                iframe.srcdoc = ''
+                code_iframe.removeChild(iframe)
+            }
             app.switch_page(pages.workspace)
         })
         btns.chat_mode.addEventListener('click', () => {
