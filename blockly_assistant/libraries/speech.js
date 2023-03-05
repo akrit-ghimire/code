@@ -13,7 +13,7 @@ const speech = {
         return new Promise((resolve) => {
             const msg = new SpeechSynthesisUtterance()
             msg.text = text
-            speechSynthesis.speak(msg)
+            window.speechSynthesis.speak(msg)
             msg.onend = () => {
                 resolve()
             }
