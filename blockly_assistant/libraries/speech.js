@@ -77,7 +77,11 @@ const speech = {
     },
     init: (element) => {
         document.body.onload = () => {
-            speech.loadVoicesWhenAvailable(/* Callback goes here */)
+            speech.loadVoicesWhenAvailable(/* Callback goes here */() => {
+                if (user_notification) {
+                    user_notification.toast('Chatbot voice has been loaded!')
+                }
+            })
         }
 
         window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
