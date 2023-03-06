@@ -22,7 +22,7 @@ const file_management = {
 
             input.addEventListener('change', async () => {
                 const type = input.files[0].name.split('.').at(-1)
-                if (type !== file_type) {
+                if (type !== file_type && type !== 'data') {
                     // reject
                     reject(`Invalid file type. Must be a .${file_type}`)
                 }
@@ -50,7 +50,7 @@ const file_management = {
     save_file: (file_name, file_type, file_content) => {
         const download_a = document.createElement('a')
         download_a.href = file_management.create_file(file_content, file_type)
-        download_a.download = `${file_name}.${file_type}`
+        download_a.download = `${file_name}.data.${file_type}` // .data is a secondary check as ios is tricky
         file_management.dump_body.append(download_a)
 
         window.requestAnimationFrame(() => {
