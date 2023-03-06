@@ -1,5 +1,18 @@
 const file_management = {
     dump_body: document.querySelector('body'),
+    // is ios platform?
+    // is_ios: () => {
+    //     return [
+    //         'iPad Simulator',
+    //         'iPhone Simulator',
+    //         'iPod Simulator',
+    //         'iPad',
+    //         'iPhone',
+    //         'iPod'
+    //     ].includes(navigator.platform)
+    //         // iPad on iOS 13 detection
+    //         || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+    // },
     // get file
     get_file: async (file_type) => {
         return await new Promise((resolve, reject) => {
@@ -18,7 +31,7 @@ const file_management = {
                 }
             })
             file_management.dump_body.append(input)
-    
+
             window.requestAnimationFrame(async () => {
                 const event = new MouseEvent('click')
                 input.dispatchEvent(event)
@@ -26,13 +39,13 @@ const file_management = {
             })
         })
     },
-    
+
     // create file
     create_file: (file_content, file_type) => {
-        const file = new Blob([JSON.stringify(file_content)], {type: `application/${file_type}`})
+        const file = new Blob([JSON.stringify(file_content)], { type: `.${file_type}` })
         return URL.createObjectURL(file)
     },
-    
+
     // save file
     save_file: (file_name, file_type, file_content) => {
         const download_a = document.createElement('a')
@@ -45,6 +58,6 @@ const file_management = {
             download_a.dispatchEvent(event)
             file_management.dump_body.removeChild(download_a)
         })
-        
+
     }
 }

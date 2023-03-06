@@ -53,9 +53,18 @@ const speech = {
 
     speak: async (text) => {
         return new Promise((resolve) => {
-            setTimeout(() => speech.playByText("en-US", text, () => {
-                resolve()
-            }), 300)
+            const button = document.createElement('button')
+            button.onclick = () => {
+                setTimeout(() => speech.playByText("en-US", text, () => {
+                    resolve()
+                }), 300)
+            }
+            document.body.append(button) // add button to document
+            window.requestAnimationFrame(async () => {
+                const event = new MouseEvent('click')
+                button.dispatchEvent(event) // simulate click
+                document.body.removeChild(button) // remove the button
+            })
         })
     },
 
