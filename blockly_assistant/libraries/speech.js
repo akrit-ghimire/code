@@ -3,6 +3,8 @@ const speech = {
     _voices: null,
     _cache: {},
 
+    speech_synth_trigger: null,
+
 
 
     // retries till voices are loaded
@@ -50,21 +52,24 @@ const speech = {
         speech._speechSynth.speak(utterance)
     },
 
+    create_speech_synth_trigger: () => {
+        speech.speech_synth_trigger = document.createElement('button')
+        document.body.append(speech.speech_synth_trigger) // add button to document
+    },
 
     speak: async (text) => {
         return new Promise((resolve) => {
-            const button = document.createElement('button')
-            button.onclick = () => {
+            
+            speech.speech_synth_trigger.onclick = () => {
                 setTimeout(() => speech.playByText("en-US", text, () => {
                     resolve()
                 }), 300)
             }
-            document.body.append(button) // add button to document
             window.requestAnimationFrame(async () => {
                 const event = new MouseEvent('click')
-                button.dispatchEvent(event) // simulate click
-                document.body.removeChild(button) // remove the button
+                speech.speech_synth_trigger.dispatchEvent(event) // simulate click
             })
+            
         })
     },
 
@@ -85,6 +90,8 @@ const speech = {
         })
     },
     init: (element) => {
+        speech.create_speech_synth_trigger()
+
         document.body.onload = () => {
             speech.loadVoicesWhenAvailable(/* Callback goes here */() => {
                 if (user_notification) {

@@ -1,18 +1,5 @@
 const file_management = {
     dump_body: document.querySelector('body'),
-    // is ios platform?
-    // is_ios: () => {
-    //     return [
-    //         'iPad Simulator',
-    //         'iPhone Simulator',
-    //         'iPod Simulator',
-    //         'iPad',
-    //         'iPhone',
-    //         'iPod'
-    //     ].includes(navigator.platform)
-    //         // iPad on iOS 13 detection
-    //         || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
-    // },
     // get file
     get_file: async (file_type) => {
         return await new Promise((resolve, reject) => {
