@@ -175,7 +175,7 @@ app = {
         const code = Blockly.JavaScript.workspaceToCode(workspace)
         const iframe = document.createElement('iframe')
         iframe.sandbox = "allow-scripts allow-same-origin"
-        iframe.srcdoc = `<html><head></head><body><script>const app = window.top.app;${code};main()</script></body></html>`
+        iframe.srcdoc = `<html><head></head><body><script>const app = window.top.app;${code};</script></body></html>`
         code_iframe.append(iframe)
     },
     file_system: {
@@ -185,9 +185,14 @@ app = {
             file_management.save_file(file_name, 'akrit', json)
         },
         load_code: async () => {
-            const json = await file_management.get_file('akrit')
-            Blockly.serialization.workspaces.load(json, workspace);
-            user_notification.toast('Successfully loaded file!')
+            try {
+                const json = await file_management.get_file('akrit')
+                Blockly.serialization.workspaces.load(json, workspace);
+                user_notification.toast('Successfully loaded file!')
+
+            } catch(e) {
+                user_notification.toast(e)
+            }
         },
         clear_code: () => {
             const response = confirm("Are you sure you want to create a new workspace? This will delete any unsaved work.");

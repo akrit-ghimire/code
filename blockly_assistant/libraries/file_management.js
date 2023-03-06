@@ -5,14 +5,16 @@ const file_management = {
         return await new Promise((resolve, reject) => {
             const input = document.createElement('input')
             input.type = 'file'
-            // input.accept = `application/${file_type},.${file_type}` // errors on chrome android and ios devices
+            input.accept = `.${file_type}`
 
             input.addEventListener('change', async () => {
-                if (input.files.length > 0) {
-                    console.log(input.files[0].text())
+                const type = input.files[0].name.split('.').at(-1)
+                if (type !== file_type) {
+                    // reject
+                    reject(`Invalid file type. Must be a .${file_type}`)
+                }
+                else {
                     resolve(JSON.parse(await input.files[0].text())) // output of file
-                } else {
-                    console.log('who')
                 }
             })
             file_management.dump_body.append(input)

@@ -1,20 +1,3 @@
-// Blockly.common.defineBlocksWithJsonArray([
-
-//   {
-//     "type": "va_main",
-//     "message0": "main function",
-//     "nextStatement": null,
-//     "colour": 300,
-//     "tooltip": "Connect your code under this block.",
-//     "helpUrl": ""
-//   }
-// ]);
-// Blockly.JavaScript['va_print'] = ;
-// Blockly.JavaScript['va_main'] = (block) => {
-//   var code = 'console.log(' + value_message + ');\n'
-//   return code;
-// };
-
 const custom_blocks = []
 const commit_blocks = () => {
   Blockly.common.defineBlocksWithJsonArray(custom_blocks)
@@ -47,8 +30,7 @@ create_block({
   },
   js_function: (block) => {
     const whole_code = Blockly.JavaScript.statementToCode(block, 'whole_function');
-    // TODO: Assemble JavaScript into code variable.
-    var code = `const main = async () => {${whole_code}};\n`;
+    var code = `const main = async () => {${whole_code}};main()\n`;
     return code;
   },
 })
