@@ -3,10 +3,6 @@ const speech = {
     _voices: null,
     _cache: {},
 
-    speech_synth_trigger: null,
-
-
-
     // retries till voices are loaded
     loadVoicesWhenAvailable: (onComplete = () => { }) => {
         speech._speechSynth = window.speechSynthesis
@@ -51,25 +47,11 @@ const speech = {
         speech._speechSynth.cancel() // cancel current speak, if any is running
         speech._speechSynth.speak(utterance)
     },
-
-    create_speech_synth_trigger: () => {
-        speech.speech_synth_trigger = document.createElement('button')
-        document.body.append(speech.speech_synth_trigger) // add button to document
-    },
-
     speak: async (text) => {
         return new Promise((resolve) => {
-            
-            speech.speech_synth_trigger.onclick = () => {
-                setTimeout(() => speech.playByText("en-US", text, () => {
-                    resolve()
-                }), 300)
-            }
-            window.requestAnimationFrame(async () => {
-                const event = new MouseEvent('click')
-                speech.speech_synth_trigger.dispatchEvent(event) // simulate click
-            })
-            
+            setTimeout(() => speech.playByText("en-US", text, () => {
+                resolve()
+            }), 300)
         })
     },
 
@@ -90,8 +72,6 @@ const speech = {
         })
     },
     init: (element) => {
-        speech.create_speech_synth_trigger()
-
         document.body.onload = () => {
             speech.loadVoicesWhenAvailable(/* Callback goes here */() => {
                 if (user_notification) {

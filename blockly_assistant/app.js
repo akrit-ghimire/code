@@ -223,9 +223,10 @@ app = {
         btns.run.addEventListener('click', () => {
             app.switch_page(pages.select_mode)
         })
-        btns.welcome.addEventListener('click', () => {
+        btns.welcome.addEventListener('click', async () => {
             app.switch_page(pages.workspace)
             onresize() // init workspace
+            await speech.speak('Welcome to blockly assistant!') // Initiating speachSynthesis by user input allows ios devices to use the api
         })
         btns.close.addEventListener('click', () => {
             const iframe = code_iframe.querySelector('iframe')
