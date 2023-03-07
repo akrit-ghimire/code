@@ -57,18 +57,23 @@ const speech = {
 
     recognition: null,
     recognition_result: null,
+    is_listening: false,
     listen: () => {
         return new Promise((resolve) => {
+            speech.recognition.abort()
             speech.recognition.start()
-            speech.recognition.onspeechend = () => {
-                speech.recognition.stop()
-            }
-            speech.recognition.addEventListener('end', () => {
-                speech.recognition.stop()
+            speech.is_listening = true
+
+            const get_results = () => {
                 let result = speech.recognition_result
                 if (result == null) result = ''
+
+                speech.is_listening = false
+                speech.recognition.stop()
+
                 resolve(result)
-            })
+            }
+            speech.recognition.onspeechend = get_results
         })
     },
     init: (element) => {
@@ -84,15 +89,20 @@ const speech = {
         speech.recognition = new window.SpeechRecognition
         speech.recognition.interimResults = true
 
-        speech.recognition.addEventListener('result', (e) => {
+        speech.recognition.onresult = (e) => {
             const text = Array.from(e.results)
                 .map(result => result[0])
                 .map(result => result.transcript)
                 .join('')
 
-            element.innerText = text
-            speech.recognition_result = text
-        })
+            if (speech.is_listening) {
+                element.innerText = text
+                speech.recognition_result = text
+            } else {
+                element.innerText = ''
+                speech.recognition_result = ''
+            }
+        }
     }
 }
 
