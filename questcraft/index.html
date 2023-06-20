@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuestCraft</title>
+
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/minecraftia" type="text/css"/>
+    <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/general.css">
+    <link rel="stylesheet" href="./styles/mc_dialog.css">
+    <link rel="stylesheet" href="./styles/mc_achievment.css">
+    <link rel="stylesheet" href="./styles/mc_title.css">
+    <script src="./index.js" defer></script>
+    <script src="./insert_quest.js" defer></script>
+</head>
+<body>
+    <audio autoplay style="display: none;"></audio>
+    <section id="home">
+        <outside-text style="margin-bottom: -24px;">Welcome to</outside-text>
+        <mc-title>QuestCraft</mc-title>
+        <outside-text style="margin-top: 3rem;">Select a quest to complete <accent-4 data-quest-time-limit>and gain rewards</accent-4> from creative mode without any guilt!</outside-text>
+        <dialog-button data-to-selecting-view>Start</dialog-button>
+    </section>
+    <section id="selecting">
+        <dialog>
+            <dialog-title>Do you accept this quest?</dialog-title>
+            <dialog-description>
+                <p>Quest: <span><accent-1 data-quest-title></accent-1></span></p>
+                <br>
+                <p data-quest-desc></p>
+                <br>
+                <p><accent-2>Reward: <span data-quest-reward></span></accent-2></p>
+                <p>Deadline: <span data-quest-time-limit></span> from now.</p>
+                <br>
+                <p>If failed you must sacfifice:</p>
+                <p data-quest-sacrifice style="color: rgb(255, 188, 188);"></p>
+            </dialog-description>
+            <dialog-button data-to-quest-view>Accept Quest</dialog-button>
+            <dialog-button data-next-quest>Choose Another</dialog-button>
+        </dialog>
+    </section>
+    <section id="quest_view">
+        <dark-card>
+            <img src="./img/grass_block.png" data-quest-icon>
+            <dark-card-content>
+                <accent-3>New Quest: <span data-quest-title></span></accent-3>
+                <dark-card-para data-quest-desc></dark-card-para>
+            </dark-card-content>
+        </dark-card>
+        <outside-text>Time Left: <accent-4 data-quest-time-limit></accent-4></outside-text>
+        <xp-bar><xp data-progress-bar></xp></xp-bar>
+        <dark-button data-pause-play>Pause</dark-button>
+        <dark-button data-to-rewards style="margin-top: 0;">Complete</dark-button>
+    </section>
+    <section id="rewards_view">
+        <dark-card>
+            <img src="./img/grass_block.png" data-quest-icon>
+            <dark-card-content>
+                <accent-3>You have completed <span data-quest-title></span>!</accent-3>
+            </dark-card-content>
+        </dark-card>
+        <outside-text style="text-align: center;">Your Reward:</outside-text>
+        <dark-card-group data-rewards-group>
+        </dark-card-group>
+        <dark-button data-to-selecting-view>Choose Another Quest</dark-button>
+    </section>
+    <section id="failed_view">
+        <dark-card style="justify-content: center;">
+            <accent-5 style="color: red;">You have failed your quest.</accent-5>
+        </dark-card>
+        <outside-text style="text-align: center;">You must sacrifice these:</outside-text>
+        <dark-card-group data-sacrifice-group>
+        </dark-card-group>
+        <dark-button data-to-selecting-view>Try Another Quest</dark-button>
+    </section>
+</body>
+</html>

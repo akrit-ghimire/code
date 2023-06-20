@@ -1,0 +1,175 @@
+#quest_view, #rewards_view, #failed_view {
+    flex-direction: column;
+    justify-content: center;
+}
+
+dark-card, dark-card-2 {
+    display: flex;
+    width: 40rem;
+    padding: 24px;
+    margin: 32px auto;
+    margin-bottom: 32px;
+    background-color: #2D2D2D;
+    border: 0;
+    box-shadow: 8px 0 0 0 #565757,
+    0 8px 0 0 #565757,
+    4px 4px 0 0 #565757,
+    -8px 0 0 0 #565757,
+    0 -8px 0 0 #565757,
+    -4px -4px 0 0 #565757,
+    0 0 0 4px #565757,
+    4px 8px 0 0 #565757,
+    8px 4px 0 0 #565757,
+    -4px -8px 0 0 #565757,
+    -8px -4px 0 0 #565757,
+    8px -4px 0 0 #000,
+    4px -8px 0 0 #000,
+    -8px 4px 0 0 #000,
+    -4px 8px 0 0 #000,
+    -8px -8px 0 0 #000,
+    8px 8px 0 0 #000,
+    -12px 0 0 0 #000,
+    -12px -4px 0 0 #000,
+    12px 0 0 0 #000,
+    12px 4px 0 0 #000,
+    0 -12px 0 0 #000,
+    -4px -12px 0 0 #000,
+    0 12px 0 0 #000,
+    4px 12px 0 0 #000;
+    font-size: 1.4rem;
+    color: white;
+    align-items: center;
+}
+
+dark-card-2 {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin-left: .75rem;
+    margin-right: .75rem;
+}
+dark-card-2 dark-card-para {
+    margin-top: .5rem;
+}
+
+dark-card-group {
+    display: flex;
+}
+
+dark-card img, dark-card-2 img {
+    width: 4rem;
+    height: 4rem;
+    margin: auto 0;
+}
+
+
+dark-card-content {
+    display: flex;
+    flex-direction: column;
+    padding-right: 24px;
+    padding-left: 24px;
+}
+
+dark-card-para {
+    font-size: 1.1rem;
+}
+
+accent-3 {
+    color: #F0F852
+}
+accent-4 {
+    color: #DD92E0
+}
+
+outside-text {
+    font-size: 1.1rem;
+    color: white;
+    width: 40rem;
+}
+
+xp-bar {
+    display: flex;
+    width: calc(40rem + 8px);
+    height: 8px;
+    margin: 32px auto;
+    margin-bottom: 32px;
+    background-color: #2D2D2D;
+    border: 0;
+    outline: 4px solid black;
+}
+
+xp {
+    width: 50%;
+    height: auto;
+    background-color: #9DD76C;
+}
+
+dark-button {
+    display: flex;
+    width: 40rem;
+    padding: 8px;
+    margin: 32px auto;
+    margin-bottom: 32px;
+    background-color: #2D2D2D;
+    border: 0;
+    box-shadow: 4px 0 0 0 #565757,
+    0 4px 0 0 #565757,
+    2px 2px 0 0 #565757,
+    -4px 0 0 0 #565757,
+    0 -4px 0 0 #565757,
+    -2px -2px 0 0 #565757,
+    0 0 0 2px #565757,
+    2px 4px 0 0 #565757,
+    4px 2px 0 0 #565757,
+    -2px -4px 0 0 #565757,
+    -4px -2px 0 0 #565757,
+    8px -4px 0 0 #000,
+    4px -8px 0 0 #000,
+    -8px 4px 0 0 #000,
+    -4px 8px 0 0 #000,
+    -8px -8px 0 0 #000,
+    8px 8px 0 0 #000,
+    -12px 0 0 0 #000,
+    -12px -4px 0 0 #000,
+    12px 0 0 0 #000,
+    12px 4px 0 0 #000,
+    0 -12px 0 0 #000,
+    -4px -12px 0 0 #000,
+    0 12px 0 0 #000,
+    4px 12px 0 0 #000;
+    color: white;
+    justify-content: center;
+    cursor: pointer;
+}
+dark-button:hover {
+    color: #F0F852;
+}
+dark-button:active{
+    box-shadow: 4px 0 0 0 #5657577b,
+    0 4px 0 0 #5657577b,
+    2px 2px 0 0 #5657577b,
+    -4px 0 0 0 #5657577b,
+    0 -4px 0 0 #5657577b,
+    -2px -2px 0 0 #5657577b,
+    0 0 0 2px #5657577b,
+    2px 4px 0 0 #5657577b,
+    4px 2px 0 0 #5657577b,
+    -2px -4px 0 0 #5657577b,
+    -4px -2px 0 0 #5657577b,
+    8px -4px 0 0 #000,
+    4px -8px 0 0 #000,
+    -8px 4px 0 0 #000,
+    -4px 8px 0 0 #000,
+    -8px -8px 0 0 #000,
+    8px 8px 0 0 #000,
+    -12px 0 0 0 #000,
+    -12px -4px 0 0 #000,
+    12px 0 0 0 #000,
+    12px 4px 0 0 #000,
+    0 -12px 0 0 #000,
+    -4px -12px 0 0 #000,
+    0 12px 0 0 #000,
+    4px 12px 0 0 #000;
+}
