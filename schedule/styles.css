@@ -1,0 +1,122 @@
+:root {
+    --l-green: #606c38;
+    --d-green: #283618;
+    --beige:   #fefae0;
+    --l-brown: #dda15e;
+    --d-brown: #bc6c25;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-size: 20px;
+    font-family: monospace;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fefae0;
+}
+
+day-viewer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    background-color: var(--l-green);
+    width: 100%;
+}
+
+day-viewer day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 3rem;
+    margin: 0 .5rem;
+    color: var(--beige);
+    border-radius: .5rem;
+    background-color: var(--d-green);
+    opacity: .7;
+    cursor: pointer;
+}
+
+day-viewer .active {
+    opacity: 1;
+}
+
+schedule {
+    display: flex;
+    flex-direction: column;
+    /* background-color: var(--l-brown); */
+    padding: 2rem 1.5rem;
+    font-size: 1.2rem;
+    width: 100%;
+}
+
+time-block, check-block, text-block {
+    margin-bottom: .75rem;
+}
+
+time-block {
+    display: flex;
+    align-items: center;
+    color: var(--d-brown);
+}
+time-block::after {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 100%;
+    background-color: var(--l-brown);
+    margin-left: 1rem;
+}
+
+text-block {
+    display: flex;
+    padding-left: 3rem;
+}
+text-block::before {
+    content: "";
+    display: block;
+    width: .5rem;
+    height: auto;
+    background-color: var(--l-brown);
+    margin-right: .5rem;
+    color: var(--l-green);
+    border-radius: .5rem;
+}
+
+check-block {
+    display: flex;
+    padding-left: 3rem;
+    cursor: pointer
+}
+check-block::before {
+    content: "#";
+    margin-right: .5rem;
+    color: var(--l-green);
+}
+
+.striked {
+    text-decoration: line-through;
+    opacity: .7;
+}
+
+/* future update */
+line {
+    display: none;
+    position: absolute;
+    height: 2px;
+    background-color: var(--l-green);
+    width: 100%;
+    top: 20;
+    z-index: -1;
+}
