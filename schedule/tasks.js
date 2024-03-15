@@ -5,13 +5,13 @@ const [monday, tuesday, wednesday, thrusday, friday, saturday, sunday] = ['monda
 const tasks = [
     {
         type: task,
-        content: "Shave or Eyebrows",
+        content: "Shave",
         days: [monday, tuesday, wednesday, friday],
         time: 6
     },
     {
         type: task,
-        content: "Bodyshave + Wash or Hairwash",
+        content: "Shower or Hairwash",
         days: [monday, tuesday, wednesday, friday],
         time: 6
     },
@@ -35,7 +35,7 @@ const tasks = [
     },
     {
         type: task,
-        content: "Mouthcare + Skincare",
+        content: "Skincare",
         days: [monday, tuesday, wednesday, friday],
         time: 8
     },
