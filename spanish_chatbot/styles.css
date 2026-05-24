@@ -42,7 +42,7 @@ html, body {
     overflow: hidden;
     align-items: center;
     padding: 2rem 0;
-    max-width: 400px;
+    max-width: 50%;
 }
 #chat {
     height: 100%;
