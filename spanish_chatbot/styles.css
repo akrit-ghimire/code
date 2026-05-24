@@ -107,6 +107,7 @@ html, body {
 textarea {
     border: none;
     outline: none;
+    font-size: 1rem;
 }
 .grow-wrap::after {
   content: attr(data-replicated-value) " ";
