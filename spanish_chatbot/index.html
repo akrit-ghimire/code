@@ -8,35 +8,52 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fzstd@0.1.1/umd/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+    <script type="importmap">
+  {
+    "imports": {
+      "@google/generative-ai": "https://esm.run/@google/generative-ai"
+    }
+  }
+</script> 
+    <script src="script.js" type="module" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+    <div id="banner">
+        <p>Anki Notes Required</p>
+    </div>
     <div id="mandatory">
         <p>AI Key Credential</p>
-        <input type="text" name="" id="">
+        <input type="text" name="" id="ai-key">
         <p></p>
         <p>Notes File</p>
-        <input type="file" name="notes" id="notes">
+        <input type="file" name="notes" id="notes-file" accept=".colpkg">
+    </div>
+    <div id="halt" >
+        <p>Ensure AI Key and Notes File are chosen.</p>
+        <button onclick="main()">start app</button>
     </div>
     <div id="chatview">
         <div id="chat-container">
             <div id="chat">
-                <p id="chat-date">ai chat started: 24th may 2025</p>
-                <div class="bubble bubble-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae officiis tempora molestiae quisquam dicta voluptas atque, sed deserunt nobis magnam ipsum unde quidem consequuntur ipsam culpa suscipit vitae dolorum ab rem adipisci. Maxime ab omnis libero deleniti optio, enim ipsum.</div>
-                <div class="bubble bubble-right">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure, et in. Sunt quae non odit facere necessitatibus. Doloribus, aliquid dolorum!</div>
+                <p id="chat-date"></p>
             </div>
             <div id="input-container">
                 <div class="grow-wrap">
                     <textarea name="message" id="message" onInput="this.parentNode.dataset.replicatedValue = this.value" rows="1"></textarea>
                 </div>
-                <button type="submit"><i class="fa fa-send-o"></i></button>
+                <button type="submit" id="send"><i class="fa fa-send-o"></i></button>
             </div>
         </div>
         <div id="analysis-container">
-            <h3 class="title">Analysis</h3>
-            <div class="a-item">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci unde eos iusto culpa ex numquam debitis, accusamus deserunt maxime obcaecati.</div>
+            <div id="analysis">
+                <h3 class="title">Analysis</h3>
+
+            </div>
         </div>
     </div>
 </body>

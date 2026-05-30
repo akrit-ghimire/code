@@ -17,6 +17,10 @@
     font-variation-settings: "wdth" 100;
 }
 
+strong {
+    font-weight: 800;
+}
+
 html, body {
     background-color: var(--second);
     width: 100%;
@@ -26,12 +30,27 @@ html, body {
     font-size: 14px;
 }
 
+#halt {
+    width: 100%;
+    height: 100%;
+    background-color: var(--third);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#halt * {
+    padding: 2rem;
+}
+
 #chatview {
     width: 100%;
     height: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: 50% 50%;
     padding: 1.5rem;
     padding-right: 0;
+    display: none;
 }
 #chat-container {
     height: 100%;
@@ -42,10 +61,11 @@ html, body {
     overflow: hidden;
     align-items: center;
     padding: 2rem 0;
-    max-width: 50%;
+    width: 100%;
 }
 #chat {
     height: 100%;
+    width: 100%;
     background-color: var(--fourth);
     overflow-y: scroll;
     padding: 1rem;
@@ -55,7 +75,8 @@ html, body {
 }
 #chat p {
     margin: 0 auto;
-    color: var(--second)
+    color: var(--second);
+    text-align: center;
 }
 .bubble {
     margin-top: 1rem;
@@ -64,9 +85,18 @@ html, body {
     width: 85%;
     line-height: 1.25;
 }
+.bubble-short {
+    width: 100px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
 .bubble-left {
-    background-color: var(--third);
+    background-color: var(--second);
+    /* border: 2px solid var(--third); */
     color: var(--fourth);
+    cursor: pointer;
 }
 .bubble-right {
     margin-left: auto;
@@ -97,6 +127,13 @@ html, body {
 #input-container button:active {
     opacity: .7;
 }
+#input-container button:disabled {
+    background-color: var(--second);
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
 .grow-wrap {
     display: grid;
     width: 100%;
@@ -127,22 +164,29 @@ textarea {
 #analysis-container {
     width: 100%;
     height: 100%;
-    padding: 1rem;
+    padding: 2rem;
     color: var(--fourth);
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
     padding-bottom: 3rem;
-    padding-right: 1.5rem;
+    padding-right: 2.5rem;
     overflow-y: scroll;
+}
+#analysis {
+    margin-top: auto;
 }
 #analysis-container .title {
     color: var(--third);
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
     font-weight: 600;
 }
 #analysis-container .a-item {
     line-height: 1.5;
+    margin-top: 2rem;
+}
+.a-item ul {
+    margin-left: 2rem;
+}
+.a-item h3 {
+    margin-bottom: 1rem;
 }
 
 #mandatory {
@@ -156,4 +200,80 @@ textarea {
 }
 #mandatory p {
     margin-right: .5rem;
+}
+
+#banner {
+    width: 100%;
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--third);
+    color: white;
+}
+
+.typing {
+  display: block;
+  width: 40px;
+  height: 30px;
+  border-radius: 20px;
+  margin: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  display: block;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: var(--fourth);
+  margin: 3px;
+}
+
+.circle.bouncing {
+  animation: bounce 1000ms ease-in-out infinite;
+  animation-delay: 3600ms;
+}
+
+.circle:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.circle:nth-child(2) {
+  animation-delay: 333ms;
+}
+
+.circle:nth-child(3) {
+  animation-delay: 666ms;
+}
+
+@keyframes typing {
+  0% {
+    transform: scale(1);
+  }
+  33% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  33% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
